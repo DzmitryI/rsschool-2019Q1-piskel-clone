@@ -1,0 +1,248 @@
+@import 'themeColors';
+@import 'fonts';
+
+body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  font-family: 'Roboto-Regular';
+}
+
+.button {
+  margin: 0;
+  padding: 0;
+  width: 48px;
+  height: 48px;
+  background: rgba(255, 255, 255, 1);
+  border: none;
+  color: rgba(0, 0, 0, 0.541327);
+  text-align: left;
+  font-family: 'Roboto-Regular';
+  font-size: 1em;
+}
+
+.button:hover {
+  background: rgb(240, 234, 234);
+}
+
+.button:focus {
+  outline: none;
+}
+
+.button-active {
+  background: rgb(240, 234, 234);
+}
+
+img {
+  margin: 0 auto;
+  display: block;
+}
+
+ul {
+  padding: 0;
+}
+
+li {
+  align-items: center;
+  justify-content: center;
+  list-style-type: none;
+  height: 48px;
+}
+
+.item-line {
+  height: 16px;
+}
+
+.main {
+  display: grid;
+  grid-gap: 15px;
+  grid-template-columns: 1fr 2fr 6fr 3fr;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas: "pallete frame canvas preview"
+  "colors frame canvas preview";
+  margin: 10px 15px 42px 0px;
+}
+
+.conteiner {
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  color: rgba(0, 0, 0, 0.541327);
+}
+
+.color {
+  grid-area: colors;
+  height: 230px;
+}
+
+.color-item {
+  width: 20px;
+  height: 20px;
+  margin-right: 18px;
+  border-radius: 50%;
+  border: 1px solid rgb(0, 0, 0);
+}
+
+.current {
+  background: rgb(147, 151, 151);
+}
+
+.prev {
+  background: rgb(21, 223, 14);
+}
+
+.red {
+  background: rgb(245, 4, 4);
+}
+
+.blue {
+  background: rgb(82, 171, 243);
+}
+
+hr {
+  width: -webkit-fill-available;
+}
+
+.canvas {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows:  1fr 1fr 1fr;
+  grid-gap: 8px;
+  grid-area: canvas;
+}
+
+.draggable {
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.541327);
+}
+
+.circle {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.over{
+  border: 2px dashed #000;
+}
+
+.container-frame {
+  grid-area: frame;
+  min-width: 200px;
+  max-height: 670px;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.frame-add-button {
+  margin: 10px auto;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  font-family: 'Roboto-Regular';
+  font-size: 1em;
+}
+
+.buttonCarrentPage {
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  padding: 0;
+}
+
+.pallete {
+  grid-area: pallete;
+  margin-right: 10px;
+  height: 225px;
+  margin-top: 90px;
+  height: 240px;
+}
+
+.container-current-frame {
+  width: 180px;
+  height: 180px;
+  position: relative;
+  margin: 5px 0;
+}
+
+.button-frame {
+  background-repeat: no-repeat;
+  background-position: center;
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  margin: 0;
+  padding: 0;
+}
+
+// .button-canvas-frame-del {
+//   opacity:0.3;
+//   background-image: url('./assets/icons/basket.png');
+//   right: 0%;
+// }
+
+// .button-clone-frame {
+//   opacity:0.3;
+//   background-image: url('./assets/icons/clone.png');
+//   right: 0%;
+//   bottom: 0%;
+// }
+
+// .button-current-number {
+//   background-position: center;
+//   left: 0%;
+//   text-align: center;
+//   font-family: 'Roboto-Regular';
+//   font-size: 1em;
+//   font-weight: bold;
+// }
+
+// .button-move {
+//   opacity:0.3;
+//   background-image: url('./assets/icons/drag.png');
+//   left: 0%;
+//   bottom: 0%;
+// }
+
+// .preview {
+//   border: 2px solid rgb(129, 121, 121);
+//   background: rgb(170, 164, 164);
+//   grid-area: preview;
+//   height: 300px;
+//   width: 300px;
+//   position: relative;
+// }
+
+// .preview:hover .preview-button,
+// .container-current-frame:hover .button-canvas-frame-del,
+// .container-current-frame:hover .button-clone-frame,
+// .container-current-frame:hover .button-move {
+//   opacity:1;
+//   -webkit-transition: opacity .25s ease-in-out .0s;
+//   transition: opacity .25s ease-in-out .0s;
+// }
+
+// .control {
+//   display: flex;
+//   justify-content: center;
+// }
+
+// .control-fps {
+//  margin: 5px;
+// }
+
+// .preview-canvas {
+//   height: 260px;
+//   width: 100%;
+// }
+
+// .preview-button {
+//   background: url('./assets/icons/link.png') 58% 38%;
+//   position: absolute;
+//   opacity:0.3;
+//   right: 0;
+//   width: 30px;
+//   height: 30px;
+//   padding: 0;
+// }

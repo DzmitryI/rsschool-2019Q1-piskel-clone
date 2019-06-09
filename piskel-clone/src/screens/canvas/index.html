@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title><%= htmlWebpackPlugin.options.title %></title>
+</head>
+
+<body>
+  <header class="header">
+  </header>
+  <main class="main">
+    <div class="conteiner pallete">
+      <ul class="palette-list">
+        <li>
+          <button id="paint-backet_" class="button">
+            <img id="paint-backet" alt="paint backet" />
+          </button>
+        </li>
+        <li>
+          <button id="choose-color" class="button">
+            <img src="./assets/icons/choose_color.png" alt="choose color" />
+          </button>
+        </li>
+        <li class="item-line">
+          <hr />
+        </li>
+        <li>
+          <button id="move" class="button">
+            <img src="./assets/icons/move.png" alt="move" />
+          </button>
+        </li>
+        <li>
+          <button id="transform" class="button">
+            <img src="./assets/icons/transform.png" alt="transform" />
+          </button>
+        </li>
+      </ul>
+    </div>
+    <div class="conteiner color">
+      <ul class="color-list">
+        <li>
+          <div id="current" class="color-item current"></div>
+        </li>
+        <li>
+          <div id="prev" class="color-item prev"></div>
+        </li>
+        <li class="item-line">
+          <hr />
+        </li>
+        <li>
+          <div class="color-item red"></div>
+        </li>
+        <li>
+          <div class="color-item blue"></div>
+        </li>
+      </ul>
+    </div>
+    <div class="conteiner container-frame">
+      <button id="addFrame" class="frame-add-button">
+        <img src="./assets/icons/+.png" alt="move" />Add new frame
+      </button>
+    </div>
+    <div id="canvas" class="canvas">
+      <div id="canvas-item-1" class="draggable"></div>
+      <div id="canvas-item-2" class="draggable"></div>
+      <div id="canvas-item-3" class="draggable"></div>
+      <div id="canvas-item-4" class="draggable"></div>
+      <div id="canvas-item-5" class="draggable"></div>
+      <div id="canvas-item-6" class="draggable"></div>
+      <div id="canvas-item-7" class="draggable"></div>
+      <div id="canvas-item-8" class="draggable"></div>
+      <div id="canvas-item-9" class="draggable"></div>
+    </div>
+    <div id="preview" class="preview">
+      <input type='button' class='preview-button'></input>
+      <canvas class='preview-canvas'></canvas>
+      <div class='control'>
+        <p class='control-fps'>3 FPS</p>
+        <input type='range' id='sizeFPS' min='3' max='12' step='3' value='3' />
+      </div>
+    </div>
+  </main>
+</body>
+
+</html>
