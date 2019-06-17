@@ -1,7 +1,5 @@
-import './screens/canvas/index.scss';
-import paintBacketIcon from './screens/canvas/assets/icons/paint_backet.png';
+import Index from './screens/canvas/index';
 
-const paintBacket = document.getElementById('paint-backet');
-paintBacket.src = paintBacketIcon;
+const app = new Index();
 
-window.console.log('hello');
+app.start();

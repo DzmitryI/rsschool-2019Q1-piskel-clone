@@ -10,69 +10,60 @@
   <header class="header">
   </header>
   <main class="main">
-    <div class="conteiner pallete">
-      <ul class="palette-list">
-        <li>
-          <button id="paint-backet_" class="button">
-            <img id="paint-backet" alt="paint backet" />
+    <div class="control-conteiner conteiner">
+      <div class="pen-size-conteiner conteiner">
+        <div class="pen-size-item"></div>
+        <div class="pen-size-item"></div>
+        <div class="pen-size-item"></div>
+        <div class="pen-size-item"></div>
+      </div>
+      <div class="tools-conteiner conteiner">
+        <ul class="tools-conteiner__list palette-list">
+          <li class="tools-conteiner__item">
+            <button id="paint-backet_" class="tools-conteiner__item_button">
+              <img id="paint-backet" alt="paint backet" />
+            </button>
+          </li>
+          <li class="tools-conteiner__item">
+            <button id="choose-color_" class="tools-conteiner__item_button">
+              <img id="choose-color" alt="choose color" />
+            </button>
+          </li>
+          <li class="tools-conteiner__item">
+            <button id="move_" class="tools-conteiner__item_button">
+              <img id="move" alt="move" />
+            </button>
+          </li>
+          <li class="tools-conteiner__item">
+            <button id="transform_" class="tools-conteiner__item_button">
+              <img id="transform" alt="transform" />
+            </button>
+          </li>
+        </ul>
+      </div>
+      <div class="color-conteiner conteiner">
+        <div class="color-conteiner__primary">
+          <input type="color" class="color-conteiner__primary_item">
+        </div>
+        <div class="color-conteiner__secondary">
+          <input type="color" class="color-conteiner__secondary_item">
+        </div>
+        <div class="color-conteiner__swap-colors">
+          <button id="" class="color-conteiner__swap-colors_button">
+            <img id="swap-colors" alt="swap colors" />
           </button>
-        </li>
-        <li>
-          <button id="choose-color" class="button">
-            <img src="./assets/icons/choose_color.png" alt="choose color" />
-          </button>
-        </li>
-        <li class="item-line">
-          <hr />
-        </li>
-        <li>
-          <button id="move" class="button">
-            <img src="./assets/icons/move.png" alt="move" />
-          </button>
-        </li>
-        <li>
-          <button id="transform" class="button">
-            <img src="./assets/icons/transform.png" alt="transform" />
-          </button>
-        </li>
-      </ul>
+        </div>
+      </div>
     </div>
-    <div class="conteiner color">
-      <ul class="color-list">
-        <li>
-          <div id="current" class="color-item current"></div>
-        </li>
-        <li>
-          <div id="prev" class="color-item prev"></div>
-        </li>
-        <li class="item-line">
-          <hr />
-        </li>
-        <li>
-          <div class="color-item red"></div>
-        </li>
-        <li>
-          <div class="color-item blue"></div>
-        </li>
-      </ul>
-    </div>
-    <div class="conteiner container-frame">
+    <div class="frame-container conteiner">
       <button id="addFrame" class="frame-add-button">
-        <img src="./assets/icons/+.png" alt="move" />Add new frame
+        <img alt="move" />Add new frame
       </button>
     </div>
-    <div id="canvas" class="canvas">
-      <div id="canvas-item-1" class="draggable"></div>
-      <div id="canvas-item-2" class="draggable"></div>
-      <div id="canvas-item-3" class="draggable"></div>
-      <div id="canvas-item-4" class="draggable"></div>
-      <div id="canvas-item-5" class="draggable"></div>
-      <div id="canvas-item-6" class="draggable"></div>
-      <div id="canvas-item-7" class="draggable"></div>
-      <div id="canvas-item-8" class="draggable"></div>
-      <div id="canvas-item-9" class="draggable"></div>
+    <div class="canvas-conteiner">
+      <canvas class="canvas-conteiner__canvas" width="400" height="400"></canvas>
     </div>
-    <div id="preview" class="preview">
+    <div id="preview" class="preview-conteiner">
       <input type='button' class='preview-button'></input>
       <canvas class='preview-canvas'></canvas>
       <div class='control'>
@@ -81,6 +72,7 @@
       </div>
     </div>
   </main>
+  <script src="./index.js"></script>
 </body>
 
 </html>
