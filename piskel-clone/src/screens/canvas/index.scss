@@ -27,7 +27,7 @@ body {
 .conteiner {
   margin-top: 5px;
   width: 100%;
-  border: 1px solid rgba(0, 0, 0, 0.25);
+  // border: 1px solid rgba(0, 0, 0, 0.25);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   color: rgba(0, 0, 0, 0.541327);
 }
@@ -48,6 +48,40 @@ body {
   width: 20px;
   height: 20px;
   border: 1px solid black;
+  position: relative;
+  background: rgb(182, 151, 151);
+}
+
+.pen-size-item:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  background: #eee;
+  border: 1px solid rgb(43, 85, 115);
+}
+
+.pen-size-item:nth-child(1):before {
+  width: 5px;
+  height: 5px;
+}
+
+.pen-size-item:nth-child(2):before {
+  width: 8px;
+  height: 8px;
+}
+
+.pen-size-item:nth-child(3):before {
+  width: 11px;
+  height: 11px;
+}
+
+.pen-size-item:nth-child(4):before {
+  width: 14px;
+  height: 14px;
 }
 
 .tools-conteiner {
@@ -73,7 +107,7 @@ body {
 .tools-conteiner__item_button {
   margin: 1px;
   padding: 0;
-  width: 48px;
+  width: 43px;
   height: 48px;
   background: rgb(182, 151, 151);
   border: none;
@@ -83,7 +117,8 @@ body {
   font-size: 1em;
 }
 
-.tools-conteiner__item_button:hover {
+.tools-conteiner__item_button:hover,
+.pen-size-item:hover{
   background: rgb(240, 234, 234);
 }
 
@@ -112,16 +147,15 @@ img {
   position: absolute;
   width: 50px;
   height: 50px;
-  border: 1px solid black;
 }
 
 .color-conteiner__primary {
-  left: 0;
+  left: 5px;
   z-index: 100;
 }
 
 .color-conteiner__secondary {
-  right: 0;
+  right: 5px;
   top: 35px;
 }
 

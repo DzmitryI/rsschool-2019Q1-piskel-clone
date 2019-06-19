@@ -10,9 +10,12 @@ export default class Index {
   constructor() {
     this.form = document;
     this.canvasData = [];
+    this.size = 0;
   }
 
   start() {
+    const penSize = this.form.querySelector('.pen-size-item1px');
+    penSize.classList.add('tools-conteiner__item_button-active');
     const pen = this.form.getElementById('paint-backet');
     pen.src = pentIcon;
     // const paintBacket = this.form.getElementById('paint-backet');
@@ -42,9 +45,24 @@ export default class Index {
 
   mouseDown(event) {
     const penTool = document.querySelector('#pen-tool');
-    if (penTool.className === 'tools-conteiner__item_button tools-conteiner__item_button-active') {
+    if (penTool.classList[1] === 'tools-conteiner__item_button-active') {
+      const penSize = document.querySelector('#pen-size').children;
       const myColor = this.form.querySelector('.color-conteiner__primary_item').value;
       const canvas = event.target.parentNode.children[0];
+      let currenPenSize = '';
+      for (let i = 0; i < penSize.length; i += 1) {
+        if (penSize[i].classList[2] === 'tools-conteiner__item_button-active') {
+          // eslint-disable-next-line prefer-destructuring
+          currenPenSize = penSize[i].classList[1];
+        }
+      }
+      if (currenPenSize === 'pen-size-item2px') {
+        this.size = canvas.width / 32;
+      } else if (currenPenSize === 'pen-size-item3px') {
+        this.size = canvas.width / 32 * 2;
+      } else if (currenPenSize === 'pen-size-item4px') {
+        this.size = canvas.width / 32 * 3;
+      } else this.size = 0;
       canvas.onmousemove = this.onmousemove.bind(this);
       canvas.onmouseup = () => {
         canvas.onmousemove = null;
@@ -54,11 +72,13 @@ export default class Index {
       ctx.fillStyle = myColor;
       const x = event.offsetX;
       const y = event.offsetY;
+
       for (let i = 0; i < canvasData.length; i += 1) {
         const xi = canvasData[i][0] + canvasData[i][2];
         const yi = canvasData[i][1] + canvasData[i][3];
         if ((x <= xi) && (y <= yi)) {
-          ctx.fillRect(canvasData[i][0], canvasData[i][1], canvasData[i][2], canvasData[i][3]);
+          // eslint-disable-next-line max-len
+          ctx.fillRect(canvasData[i][0] - this.size, canvasData[i][1] - this.size, canvasData[i][2] + this.size, canvasData[i][3] + this.size);
           break;
         }
       }
@@ -78,7 +98,8 @@ export default class Index {
       const xi = canvasData[i][0] + canvasData[i][2];
       const yi = canvasData[i][1] + canvasData[i][3];
       if ((x <= xi) && (y <= yi)) {
-        ctx.fillRect(canvasData[i][0], canvasData[i][1], canvasData[i][2], canvasData[i][3]);
+        // eslint-disable-next-line max-len
+        ctx.fillRect(canvasData[i][0] - this.size, canvasData[i][1] - this.size, canvasData[i][2] + this.size, canvasData[i][3] + this.size);
         break;
       }
     }
