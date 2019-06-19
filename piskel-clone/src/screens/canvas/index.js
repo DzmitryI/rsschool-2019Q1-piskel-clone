@@ -47,7 +47,8 @@ export default class Index {
     const penTool = document.querySelector('#pen-tool');
     if (penTool.classList[1] === 'tools-conteiner__item_button-active') {
       const penSize = document.querySelector('#pen-size').children;
-      const myColor = this.form.querySelector('.color-conteiner__primary_item').value;
+      const primaryColor = this.form.querySelector('.color-conteiner__primary_item').value;
+      const secondaryColor = this.form.querySelector('.color-conteiner__secondary_item').value;
       const canvas = event.target.parentNode.children[0];
       let currenPenSize = '';
       for (let i = 0; i < penSize.length; i += 1) {
@@ -69,7 +70,8 @@ export default class Index {
       };
       const ctx = canvas.getContext('2d');
       const { canvasData } = this;
-      ctx.fillStyle = myColor;
+      if (event.which === 1) ctx.fillStyle = primaryColor;
+      else if (event.which === 3) ctx.fillStyle = secondaryColor;
       const x = event.offsetX;
       const y = event.offsetY;
 
@@ -86,11 +88,13 @@ export default class Index {
   }
 
   onmousemove(event) {
-    const myColor = this.form.querySelector('.color-conteiner__primary_item').value;
+    const primaryColor = this.form.querySelector('.color-conteiner__primary_item').value;
+    const secondaryColor = this.form.querySelector('.color-conteiner__secondary_item').value;
     const canvas = event.target.parentNode.children[0];
     const ctx = canvas.getContext('2d');
     const { canvasData } = this;
-    ctx.fillStyle = myColor;
+    if (event.which === 1) ctx.fillStyle = primaryColor;
+    else if (event.which === 3) ctx.fillStyle = secondaryColor;
     const x = event.offsetX;
     const y = event.offsetY;
     window.console.log(x, y);

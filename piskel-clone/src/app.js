@@ -2,6 +2,7 @@ import Index from './screens/canvas/index';
 
 const controlConteiner = document.querySelector('.pen-size-conteiner');
 const penTool = document.querySelector('#pen-tool');
+const swapColors = document.querySelector('#swap-colors');
 
 const state = {
   correntTool: '',
@@ -68,4 +69,10 @@ penTool.addEventListener('click', () => {
     state.correntTool = 'penTool';
     penTool.classList.add('tools-conteiner__item_button-active');
   }
+});
+
+swapColors.addEventListener('click', () => {
+  const primaryColor = document.querySelector('.color-conteiner__primary_item').value;
+  document.querySelector('.color-conteiner__primary_item').value = document.querySelector('.color-conteiner__secondary_item').value;
+  document.querySelector('.color-conteiner__secondary_item').value = primaryColor;
 });
