@@ -1,7 +1,7 @@
 import Index from './screens/canvas/index';
 
-const controlConteiner = document.querySelector('.pen-size-conteiner');
-const penTool = document.querySelector('#pen-tool');
+const penSizeConteiner = document.querySelector('.pen-size-conteiner');
+const toolsConteiner = document.querySelector('.tools-conteiner');
 const swapColors = document.querySelector('#swap-colors');
 
 const state = {
@@ -12,7 +12,7 @@ const state = {
 const app = new Index();
 app.start();
 
-controlConteiner.addEventListener('click', (event) => {
+penSizeConteiner.addEventListener('click', (event) => {
   const arrSize = event.target.parentNode.children;
   if (event.target.classList[1] === 'pen-size-item1px') {
     if (state.correntPenSize === 'pen-size-item1px') {
@@ -61,13 +61,30 @@ controlConteiner.addEventListener('click', (event) => {
   }
 });
 
-penTool.addEventListener('click', () => {
-  if (state.correntTool === 'penTool') {
-    penTool.classList.remove('tools-conteiner__item_button-active');
-    state.correntTool = '';
-  } else {
-    state.correntTool = 'penTool';
-    penTool.classList.add('tools-conteiner__item_button-active');
+toolsConteiner.addEventListener('click', (event) => {
+  const arrSize = event.target.parentNode.parentNode.parentNode.children;
+  if (event.target.parentNode.id === 'tool-pen') {
+    if (state.correntTool === 'toolPen') {
+      event.target.parentNode.classList.remove('tools-conteiner__item_button-active');
+      state.correntTool = '';
+    } else {
+      for (let i = 0; i < arrSize.length; i += 1) {
+        arrSize[i].children[0].classList.remove('tools-conteiner__item_button-active');
+      }
+      state.correntTool = 'toolPen';
+      event.target.parentNode.classList.add('tools-conteiner__item_button-active');
+    }
+  } else if (event.target.parentNode.id === 'tool-paint-bucket') {
+    if (state.correntTool === 'toolPaintBucket') {
+      event.target.parentNode.classList.remove('tools-conteiner__item_button-active');
+      state.correntTool = '';
+    } else {
+      for (let i = 0; i < arrSize.length; i += 1) {
+        arrSize[i].children[0].classList.remove('tools-conteiner__item_button-active');
+      }
+      state.correntTool = 'toolPaintBucket';
+      event.target.parentNode.classList.add('tools-conteiner__item_button-active');
+    }
   }
 });
 

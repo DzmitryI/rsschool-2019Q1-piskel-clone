@@ -34,7 +34,7 @@ body {
 
 .control-conteiner {
   grid-area: control;
-  max-width: 100px;
+  width: 100px;
 }
 
 .pen-size-conteiner {
@@ -107,8 +107,8 @@ body {
 .tools-conteiner__item_button {
   margin: 1px;
   padding: 0;
-  width: 43px;
-  height: 48px;
+  width: 46px;
+  height: 46px;
   background: rgb(182, 151, 151);
   border: none;
   color: rgba(0, 0, 0, 0.541327);
@@ -236,8 +236,8 @@ img {
 }
 
 .canvas-conteiner__canvas {
- border: 3px solid rgb(201, 45, 45);
- background-color: rgb(56, 223, 22);
+//  border: 3px solid rgb(201, 45, 45);
+//  background-color: rgb(56, 223, 22);
 }
 
 .over {
