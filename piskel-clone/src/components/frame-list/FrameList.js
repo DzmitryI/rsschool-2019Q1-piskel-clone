@@ -4,7 +4,6 @@ import backgroundCanvasImg from '../../assets/images/canvas-backgrounds/canvas-b
 export default class FrameList {
   constructor() {
     this.form = document;
-    this.countFrame = 0;
   }
 
   render() {
@@ -18,7 +17,6 @@ export default class FrameList {
     buttonCloneFrame.className = 'button-frame button-clone-frame';
     const buttonCurrentNumber = document.createElement('input');
     buttonCurrentNumber.className = 'button-frame button-current-number';
-    // this.countFrame += 1;
     buttonCurrentNumber.value = document.querySelectorAll('.button-current-number').length + 1;
     buttonCurrentNumber.disabled = true;
     const buttonMove = document.createElement('button');
@@ -42,10 +40,9 @@ export default class FrameList {
     containerFrame.addEventListener('click', this.click.bind(this));
   }
 
-
   click(event) {
     const currentNumberFrame = () => {
-      const frameCurrent = document.querySelectorAll('.button-current-number');
+      const frameCurrent = this.form.querySelectorAll('.button-current-number');
       for (let i = 0; i < frameCurrent.length; i += 1) {
         frameCurrent[i].value = i + 1;
       }
@@ -54,7 +51,17 @@ export default class FrameList {
       event.target.parentNode.parentNode.removeChild(event.target.parentNode);
       this.countFrame -= 1;
       currentNumberFrame();
+    } else if (event.target.classList[1] === 'button-clone-frame') {
+      const { nextSibling } = event.target.parentNode;
+      const cloneCanv = event.target.parentNode.children[4];
+      const newCloneFrame = event.target.parentNode.cloneNode(true);
+      const newCloneCanv = newCloneFrame.children[4];
+      const ctx = newCloneCanv.getContext('2d');
+      // eslint-disable-next-line max-len
+      ctx.drawImage(cloneCanv, 0, 0, cloneCanv.width, cloneCanv.height, 0, 0, newCloneCanv.width, newCloneCanv.height);
+      event.target.parentNode.parentNode.insertBefore(newCloneFrame, nextSibling);
+      currentNumberFrame();
     }
-    event.stopPropagation();
+    event.stopImmediatePropagation();
   }
 }
