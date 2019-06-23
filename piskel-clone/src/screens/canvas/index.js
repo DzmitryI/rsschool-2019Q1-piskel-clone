@@ -1,11 +1,15 @@
 import './index.scss';
-import penIcon from './assets/icons/tool-pen.png';
-import paintBacketIcon from './assets/icons/tool-paint-bucket.png';
-import eraserIcon from './assets/icons/tool-eraser.png';
+import penIcon from '../../assets/images/icons/tools/tool-pen.png';
+import paintBacketIcon from '../../assets/images/icons/tools/tool-paint-bucket.png';
+import eraserIcon from '../../assets/images/icons/tools/tool-eraser.png';
+
+import backgroundCanvasImg from '../../assets/images/canvas-backgrounds/canvas-background-light.png';
+
+import framePlusIcon from '../../assets/images/icons/frame/frame-plus.png';
 // import chooseColorIcon from './assets/icons/choose_color.png';
-import moveIcon from './assets/icons/move.png';
-import transformBacketIcon from './assets/icons/transform.png';
-import swapColrsIcon from './assets/icons/swap_color.png';
+import moveIcon from '../../assets/images/icons/tools/move.png';
+import transformBacketIcon from '../../assets/images/icons/tools/transform.png';
+import swapColrsIcon from '../../assets/images/icons/tools/swap_color.png';
 
 export default class Index {
   constructor() {
@@ -23,6 +27,13 @@ export default class Index {
     paintBacket.src = paintBacketIcon;
     const eraser = this.form.getElementById('tool-eraser-img');
     eraser.src = eraserIcon;
+
+    const backgroundCanvas = this.form.querySelector('.canvas-conteiner__canvas');
+    backgroundCanvas.style.backgroundImage = `url(${backgroundCanvasImg})`;
+
+    const framePlus = this.form.getElementById('frame-plus-img');
+    framePlus.src = framePlusIcon;
+
     // const chooseColor = this.form.getElementById('choose-color');
     // chooseColor.src = chooseColorIcon;
     const move = this.form.getElementById('move');
@@ -32,19 +43,20 @@ export default class Index {
     const swapColors = this.form.getElementById('swap-colors');
     swapColors.src = swapColrsIcon;
 
-    const canvas = this.form.querySelector('canvas');
-    const ctx = canvas.getContext('2d');
-    ctx.fillStyle = 'brown';
+    const canvas = this.form.querySelector('.canvas-conteiner__canvas');
+    // const ctx = canvas.getContext('2d');
+    // ctx.fillStyle = 'brown';
 
     const x = canvas.width / 32;
     const canvasData = [];
     for (let i = 0; i < 32; i += 1) {
       for (let j = 0; j < 32; j += 1) {
         canvasData.push([j * x, i * x, x, x, j, i, 'brown']);
-        ctx.fillRect(j * x, i * x, x, x);
+        // ctx.fillRect(j * x, i * x, x, x);
       }
     }
-    ctx.fillRect(0, 0, 400, 400);
+    // ctx.Rect(0, 0, 400, 400);
+    // ctx.stroke();
     this.canvasData = canvasData;
     canvas.addEventListener('mousedown', this.mouseDown.bind(this));
   }

@@ -1,8 +1,10 @@
 import Index from './screens/canvas/index';
+import FrameList from './components/frame-list/FrameList';
 
 const penSizeConteiner = document.querySelector('.pen-size-conteiner');
 const toolsConteiner = document.querySelector('.tools-conteiner');
 const swapColors = document.querySelector('#swap-colors');
+const buttonAddFrame = document.getElementById('addFrame');
 
 const state = {
   correntTool: '',
@@ -103,4 +105,9 @@ swapColors.addEventListener('click', () => {
   const primaryColor = document.querySelector('.color-conteiner__primary_item').value;
   document.querySelector('.color-conteiner__primary_item').value = document.querySelector('.color-conteiner__secondary_item').value;
   document.querySelector('.color-conteiner__secondary_item').value = primaryColor;
+});
+
+buttonAddFrame.addEventListener('click', () => {
+  const frameList = new FrameList();
+  frameList.render();
 });

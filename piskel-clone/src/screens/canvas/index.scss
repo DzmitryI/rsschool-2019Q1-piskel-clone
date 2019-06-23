@@ -118,11 +118,13 @@ body {
 }
 
 .tools-conteiner__item_button:hover,
-.pen-size-item:hover{
+.pen-size-item:hover,
+.frame-add-button:hover {
   background: rgb(240, 234, 234);
 }
 
-.tools-conteiner__item_button:focus {
+.tools-conteiner__item_button:focus,
+.frame-add-button:focus {
   outline: none;
 }
 
@@ -185,7 +187,7 @@ img {
 
 .frame-container {
   grid-area: frame;
-  width: 200px;
+  width: 170px;
   max-height: 700px;
   overflow: auto;
   display: flex;
@@ -198,7 +200,8 @@ img {
   margin: 10px auto;
   border: 1px solid rgba(0, 0, 0, 0.25);
   font-family: 'Roboto-Regular';
-  font-size: 1em;
+  border-radius: 5%;
+  font-size: 13px;
 }
 
 .buttonCarrentPage {
@@ -208,12 +211,12 @@ img {
   padding: 0;
 }
 
-.container-current-frame {
-  width: 180px;
-  height: 180px;
-  position: relative;
-  margin: 5px 0;
-}
+// .container-current-frame {
+//   width: 180px;
+//   height: 180px;
+//   position: relative;
+//   margin: 5px 0;
+// }
 
 .button-frame {
   background-repeat: no-repeat;

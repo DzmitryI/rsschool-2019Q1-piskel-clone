@@ -45,7 +45,7 @@ module.exports = {
       title: 'piskel-clone',
       template: './src/screens/canvas/index.html',
       meta: { viewport: 'width=device-width, initial-scale=1, shrink-to-fit=no' },
-      favicon: './src/screens/canvas/assets/images/favicon.png',
+      favicon: './src/assets/images/favicon.png',
     })
   ],
 };
