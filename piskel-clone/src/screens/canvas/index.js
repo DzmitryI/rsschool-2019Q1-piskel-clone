@@ -1,6 +1,7 @@
 import './index.scss';
 import penIcon from './assets/icons/tool-pen.png';
 import paintBacketIcon from './assets/icons/tool-paint-bucket.png';
+import eraserIcon from './assets/icons/tool-eraser.png';
 // import chooseColorIcon from './assets/icons/choose_color.png';
 import moveIcon from './assets/icons/move.png';
 import transformBacketIcon from './assets/icons/transform.png';
@@ -20,6 +21,8 @@ export default class Index {
     pen.src = penIcon;
     const paintBacket = this.form.getElementById('tool-paint-bucket-img');
     paintBacket.src = paintBacketIcon;
+    const eraser = this.form.getElementById('tool-eraser-img');
+    eraser.src = eraserIcon;
     // const chooseColor = this.form.getElementById('choose-color');
     // chooseColor.src = chooseColorIcon;
     const move = this.form.getElementById('move');
@@ -49,7 +52,9 @@ export default class Index {
   mouseDown(event) {
     const toolPen = document.querySelector('#tool-pen');
     const toolPaintBucket = document.querySelector('#tool-paint-bucket');
-    if (toolPen.classList[1] === 'tools-conteiner__item_button-active') {
+    const toolEraser = document.querySelector('#tool-eraser');
+    if ((toolPen.classList[1] === 'tools-conteiner__item_button-active')
+      || (toolEraser.classList[1] === 'tools-conteiner__item_button-active')) {
       const penSize = document.querySelector('#pen-size').children;
       const primaryColor = this.form.querySelector('.color-conteiner__primary_item').value;
       const secondaryColor = this.form.querySelector('.color-conteiner__secondary_item').value;
@@ -77,6 +82,9 @@ export default class Index {
       const { canvasData } = this;
       if (event.which === 1) ctx.fillStyle = primaryColor;
       else if (event.which === 3) ctx.fillStyle = secondaryColor;
+      if (toolEraser.classList[1] === 'tools-conteiner__item_button-active') {
+        ctx.globalCompositeOperation = 'destination-out';
+      } else ctx.globalCompositeOperation = 'source-over';
       const x = event.offsetX;
       const y = event.offsetY;
 

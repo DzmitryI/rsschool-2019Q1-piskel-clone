@@ -85,6 +85,17 @@ toolsConteiner.addEventListener('click', (event) => {
       state.correntTool = 'toolPaintBucket';
       event.target.parentNode.classList.add('tools-conteiner__item_button-active');
     }
+  } else if (event.target.parentNode.id === 'tool-eraser') {
+    if (state.correntTool === 'toolEraser') {
+      event.target.parentNode.classList.remove('tools-conteiner__item_button-active');
+      state.correntTool = '';
+    } else {
+      for (let i = 0; i < arrSize.length; i += 1) {
+        arrSize[i].children[0].classList.remove('tools-conteiner__item_button-active');
+      }
+      state.correntTool = 'toolEraser';
+      event.target.parentNode.classList.add('tools-conteiner__item_button-active');
+    }
   }
 });
 
