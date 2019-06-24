@@ -238,11 +238,6 @@ img {
   background: grey;
 }
 
-.canvas-conteiner__canvas {
-//  border: 3px solid rgb(201, 45, 45);
-//  background-color: rgb(56, 223, 22);
-}
-
 .over {
   border: 2px dashed #000;
 }
@@ -252,6 +247,6 @@ img {
   background: rgb(170, 164, 164);
   grid-area: preview;
   height: 300px;
-  width: 300px;
+  width: 280px;
   position: relative;
 }
