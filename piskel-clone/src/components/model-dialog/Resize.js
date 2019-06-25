@@ -14,10 +14,8 @@ export default class Resize {
   }
 
   mouseDown() {
-    console.log(this.form);
-    // const canvas = this.form.querySelector('.canvas-conteiner__canvas');
-    // const ctx = canvas.getContext('2d');
-    // ctx.drawImage(canvas, 0, 0, canvas.width, canvas.height, 0, 0, canvas.width, canvas.height);
-    // ctx.scale(2, 2);
+    const canvas = this.form.querySelector('.canvas-conteiner__canvas');
+    const ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
   }
 }

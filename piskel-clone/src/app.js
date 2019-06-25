@@ -5,6 +5,7 @@ import Resize from './components/model-dialog/Resize';
 
 const penSizeConteiner = document.querySelector('.pen-size-conteiner');
 const toolsConteiner = document.querySelector('.tools-conteiner');
+const settingsConteiner = document.querySelector('.settings-conteiner__list');
 const swapColors = document.querySelector('#swap-colors');
 const buttonAddFrame = document.getElementById('addFrame');
 // const sizeFPS = document.getElementById('sizeFPS');
@@ -12,6 +13,7 @@ const buttonAddFrame = document.getElementById('addFrame');
 const state = {
   correntTool: '',
   correntPenSize: '',
+  correntSettingTool: '',
 };
 
 const app = new Index();
@@ -103,6 +105,25 @@ toolsConteiner.addEventListener('click', (event) => {
       }
       state.correntTool = 'toolEraser';
       event.target.parentNode.classList.add('tools-conteiner__item_button-active');
+    }
+  }
+});
+
+settingsConteiner.addEventListener('click', (event) => {
+  const arrSetting = document.querySelector('.settings-conteiner__list');
+  const settingResizeConteiner = document.querySelector('.setting-resize-conteiner');
+  if (event.target.parentNode.id === 'setting-resize') {
+    if (state.correntSettingTool === 'settingResize') {
+      event.target.parentNode.classList.remove('settings-conteiner__item_button-active');
+      state.correntSettingTool = '';
+      settingResizeConteiner.style.visibility = 'hidden';
+    } else {
+      for (let i = 0; i < arrSetting.children.length; i += 1) {
+        arrSetting.children[i].children[0].classList.remove('settings-conteiner__item_button-active');
+      }
+      state.correntSettingTool = 'settingResize';
+      event.target.parentNode.classList.add('settings-conteiner__item_button-active');
+      settingResizeConteiner.style.visibility = 'visible';
     }
   }
 });
