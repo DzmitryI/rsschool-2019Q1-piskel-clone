@@ -1,6 +1,7 @@
 import Index from './screens/canvas/index';
-import FrameList from './components/frame-list/FrameList';
 import Preview from './screens/preview/Preview';
+import FrameList from './components/frame-list/FrameList';
+import Resize from './components/model-dialog/Resize';
 
 const penSizeConteiner = document.querySelector('.pen-size-conteiner');
 const toolsConteiner = document.querySelector('.tools-conteiner');
@@ -15,6 +16,9 @@ const state = {
 
 const app = new Index();
 app.start();
+
+const resize = new Resize();
+resize.init();
 
 penSizeConteiner.addEventListener('click', (event) => {
   const arrSize = event.target.parentNode.children;

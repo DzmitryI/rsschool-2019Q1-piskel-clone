@@ -68,13 +68,45 @@
     <div class="canvas-conteiner">
       <canvas class="canvas-conteiner__canvas" width="400" height="400"></canvas>
     </div>
-    <div id="preview" class="preview-conteiner">
-      <input type='button' class='preview-button'></input>
-      <canvas class='preview-canvas'></canvas>
-      <div class='control'>
-        <p class='control-fps'>3 FPS</p>
-        <input type='range' id='sizeFPS' min='0' max='12' step='3' value='3' />
+    <div class="preview-and-setting-conteiner conteiner">
+      <div id="preview" class="preview-conteiner">
+        <input type='button' class='preview-button'></input>
+        <canvas class='preview-canvas'></canvas>
+        <div class='control'>
+          <p class='control-fps'>3 FPS</p>
+          <input type='range' id='sizeFPS' min='0' max='12' step='3' value='3' />
+        </div>
       </div>
+      <div class="setting-resize-conteiner conteiner">
+        <form action="" class="resize-canvas-form" name="resize-canvas-form">
+          <legend>Resize</legend>
+          <div class="resize-canvas-form__wrap">
+            <input type="radio" name="resize" checked="checked" value="32" /><span>32 х 32</span>
+            <input type="radio" name="resize" value="64" /><span>64 x 64</span>
+            <input type="radio" name="resize" value="128" /><span>128 x 128</span>
+          </div>
+          <input type="button" class="resize-button" value="Resize" />
+        </form>
+      </div>
+    </div>
+    <div class="settings-conteiner conteiner">
+      <ul class="settings-conteiner__list palette-list">
+        <li class="settings-conteiner__item">
+          <button id="setting-resize" class="settings-conteiner__item_button">
+            <img id="setting-resize-img" alt="tool resize" />
+          </button>
+        </li>
+        <li class="settings-conteiner__item">
+          <button id="setting-save" class="settings-conteiner__item_button">
+            <img id="setting-save-img" alt="tool save" />
+          </button>
+        </li>
+        <li class="settings-conteiner__item">
+          <button id="setting-export" class="settings-conteiner__item_button">
+            <img id="setting-export-img" alt="tool export" />
+          </button>
+        </li>
+      </ul>
     </div>
   </main>
   <script src="./index.js"></script>

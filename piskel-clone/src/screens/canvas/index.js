@@ -6,15 +6,20 @@ import eraserIcon from '../../assets/images/icons/tools/tool-eraser.png';
 import backgroundCanvasImg from '../../assets/images/canvas-backgrounds/canvas-background-light.png';
 
 import framePlusIcon from '../../assets/images/icons/frame/frame-plus.png';
-// import chooseColorIcon from './assets/icons/choose_color.png';
 import moveIcon from '../../assets/images/icons/tools/move.png';
 import transformBacketIcon from '../../assets/images/icons/tools/transform.png';
 import swapColrsIcon from '../../assets/images/icons/tools/swap_color.png';
 
+import settingResizeIcon from '../../assets/images/icons/settings/settings-resize.png';
+import settingSeveIcon from '../../assets/images/icons/settings/settings-save.png';
+import settingExportIcon from '../../assets/images/icons/settings/settings-export.png';
+
 export default class Index {
   constructor() {
     this.form = document;
-    this.canvasData = [];
+    this.canvasData32 = [];
+    this.canvasData64 = [];
+    this.canvasData128 = [];
     this.size = 0;
   }
 
@@ -34,8 +39,13 @@ export default class Index {
     const framePlus = this.form.getElementById('frame-plus-img');
     framePlus.src = framePlusIcon;
 
-    // const chooseColor = this.form.getElementById('choose-color');
-    // chooseColor.src = chooseColorIcon;
+    const resize = this.form.getElementById('setting-resize-img');
+    resize.src = settingResizeIcon;
+    const save = this.form.getElementById('setting-save-img');
+    save.src = settingSeveIcon;
+    const exportIcon = this.form.getElementById('setting-export-img');
+    exportIcon.src = settingExportIcon;
+
     const move = this.form.getElementById('move');
     move.src = moveIcon;
     const transform = this.form.getElementById('transform');
@@ -46,18 +56,34 @@ export default class Index {
     const canvas = this.form.querySelector('.canvas-conteiner__canvas');
     // const ctx = canvas.getContext('2d');
     // ctx.fillStyle = 'brown';
-
-    const x = canvas.width / 32;
-    const canvasData = [];
+    // const resizeArr = this.form.getElementsByName('resize');
+    // const currentResize = +[].filter.call(resizeArr, item => item.checked)[0].value;
+    const x32 = canvas.width / 32;
+    const x64 = canvas.width / 64;
+    const x128 = canvas.width / 128;
+    const canvasData32 = [];
+    const canvasData64 = [];
+    const canvasData128 = [];
     for (let i = 0; i < 32; i += 1) {
       for (let j = 0; j < 32; j += 1) {
-        canvasData.push([j * x, i * x, x, x, j, i, 'brown']);
-        // ctx.fillRect(j * x, i * x, x, x);
+        canvasData32.push([j * x32, i * x32, x32, x32, j, i]);
       }
     }
-    // ctx.Rect(0, 0, 400, 400);
+    for (let i = 0; i < 64; i += 1) {
+      for (let j = 0; j < 64; j += 1) {
+        canvasData64.push([j * x64, i * x64, x64, x64, j, i]);
+      }
+    }
+    for (let i = 0; i < 128; i += 1) {
+      for (let j = 0; j < 128; j += 1) {
+        canvasData128.push([j * x128, i * x128, x128, x128, j, i]);
+      }
+    }
+    // ctx.rect(0, 0, 400, 400);
     // ctx.stroke();
-    this.canvasData = canvasData;
+    this.canvasData32 = canvasData32;
+    this.canvasData64 = canvasData64;
+    this.canvasData128 = canvasData128;
     canvas.addEventListener('mousedown', this.mouseDown.bind(this));
   }
 
@@ -72,6 +98,8 @@ export default class Index {
       const secondaryColor = this.form.querySelector('.color-conteiner__secondary_item').value;
       const canvas = event.target.parentNode.children[0];
       let currenPenSize = '';
+      const resizeArr = this.form.getElementsByName('resize');
+      const currentResize = +[].filter.call(resizeArr, item => item.checked)[0].value;
       for (let i = 0; i < penSize.length; i += 1) {
         if (penSize[i].classList[2] === 'tools-conteiner__item_button-active') {
           // eslint-disable-next-line prefer-destructuring
@@ -79,11 +107,11 @@ export default class Index {
         }
       }
       if (currenPenSize === 'pen-size-item2px') {
-        this.size = canvas.width / 32;
+        this.size = canvas.width / currentResize;
       } else if (currenPenSize === 'pen-size-item3px') {
-        this.size = canvas.width / 32 * 2;
+        this.size = canvas.width / currentResize * 2;
       } else if (currenPenSize === 'pen-size-item4px') {
-        this.size = canvas.width / 32 * 3;
+        this.size = canvas.width / currentResize * 3;
       } else this.size = 0;
       const { size } = this;
       canvas.onmousemove = this.onmousemove.bind(this);
@@ -91,7 +119,10 @@ export default class Index {
         canvas.onmousemove = null;
       };
       const ctx = canvas.getContext('2d');
-      const { canvasData } = this;
+      let canvasData = [];
+      if (currentResize === 32) canvasData = this.canvasData32;
+      else if (currentResize === 64) canvasData = this.canvasData64;
+      else if (currentResize === 128) canvasData = this.canvasData128;
       if (event.which === 1) ctx.fillStyle = primaryColor;
       else if (event.which === 3) ctx.fillStyle = secondaryColor;
       if (toolEraser.classList[1] === 'tools-conteiner__item_button-active') {
@@ -253,13 +284,17 @@ export default class Index {
     }
   }
 
-
   onmousemove(event) {
     const primaryColor = this.form.querySelector('.color-conteiner__primary_item').value;
     const secondaryColor = this.form.querySelector('.color-conteiner__secondary_item').value;
     const canvas = event.target.parentNode.children[0];
     const ctx = canvas.getContext('2d');
-    const { canvasData } = this;
+    const resizeArr = this.form.getElementsByName('resize');
+    const currentResize = +[].filter.call(resizeArr, item => item.checked)[0].value;
+    let canvasData = [];
+    if (currentResize === 32) canvasData = this.canvasData32;
+    else if (currentResize === 64) canvasData = this.canvasData64;
+    else if (currentResize === 128) canvasData = this.canvasData128;
     if (event.which === 1) ctx.fillStyle = primaryColor;
     else if (event.which === 3) ctx.fillStyle = secondaryColor;
     const x = event.offsetX;
