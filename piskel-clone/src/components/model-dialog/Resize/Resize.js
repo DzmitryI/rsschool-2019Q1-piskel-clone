@@ -8,9 +8,9 @@ export default class Resize {
 
   init() {
     const resizeButton = this.form.querySelector('.resize-button');
-    resizeButton.addEventListener('mousedown', this.mouseDown.bind(this));
     const resizeArr = this.form.getElementsByName('resize');
     this.currentSize = +[].filter.call(resizeArr, item => item.checked)[0].value;
+    resizeButton.addEventListener('mousedown', this.mouseDown.bind(this));
   }
 
   mouseDown() {

@@ -1,7 +1,8 @@
 import Index from './screens/canvas/index';
 import Preview from './screens/preview/Preview';
 import FrameList from './components/frame-list/FrameList';
-import Resize from './components/model-dialog/Resize';
+import Resize from './components/model-dialog/Resize/Resize';
+import Save from './screens/export/Save';
 
 const penSizeConteiner = document.querySelector('.pen-size-conteiner');
 const toolsConteiner = document.querySelector('.tools-conteiner');
@@ -21,6 +22,9 @@ app.start();
 
 const resize = new Resize();
 resize.init();
+
+const save = new Save();
+save.init();
 
 penSizeConteiner.addEventListener('click', (event) => {
   const arrSize = event.target.parentNode.children;
@@ -112,18 +116,34 @@ toolsConteiner.addEventListener('click', (event) => {
 settingsConteiner.addEventListener('click', (event) => {
   const arrSetting = document.querySelector('.settings-conteiner__list');
   const settingResizeConteiner = document.querySelector('.setting-resize-conteiner');
+  const settingSaveConteiner = document.querySelector('.save-canvas-conteiner');
   if (event.target.parentNode.id === 'setting-resize') {
     if (state.correntSettingTool === 'settingResize') {
       event.target.parentNode.classList.remove('settings-conteiner__item_button-active');
       state.correntSettingTool = '';
-      settingResizeConteiner.style.visibility = 'hidden';
+      settingResizeConteiner.style.display = 'none';
     } else {
       for (let i = 0; i < arrSetting.children.length; i += 1) {
         arrSetting.children[i].children[0].classList.remove('settings-conteiner__item_button-active');
+        settingSaveConteiner.style.display = 'none';
       }
       state.correntSettingTool = 'settingResize';
       event.target.parentNode.classList.add('settings-conteiner__item_button-active');
-      settingResizeConteiner.style.visibility = 'visible';
+      settingResizeConteiner.style.display = 'block';
+    }
+  } else if (event.target.parentNode.id === 'setting-save') {
+    if (state.correntSettingTool === 'settingSave') {
+      event.target.parentNode.classList.remove('settings-conteiner__item_button-active');
+      state.correntSettingTool = '';
+      settingSaveConteiner.style.display = 'none';
+    } else {
+      for (let i = 0; i < arrSetting.children.length; i += 1) {
+        arrSetting.children[i].children[0].classList.remove('settings-conteiner__item_button-active');
+        settingResizeConteiner.style.display = 'none';
+      }
+      state.correntSettingTool = 'settingSave';
+      event.target.parentNode.classList.add('settings-conteiner__item_button-active');
+      settingSaveConteiner.style.display = 'block';
     }
   }
 });

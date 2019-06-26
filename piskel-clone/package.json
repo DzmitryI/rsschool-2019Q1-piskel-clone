@@ -11,6 +11,7 @@
   "author": "Dzmitry Ivanou <3prn@mail.ru>",
   "license": "ISC",
   "dependencies": {
+    "file-saver": "^2.0.2",
     "lodash": "^4.17.11"
   },
   "devDependencies": {
