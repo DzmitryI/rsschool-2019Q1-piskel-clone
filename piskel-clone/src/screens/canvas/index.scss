@@ -237,7 +237,16 @@ img {
 
 .preview-and-setting-conteiner {
   grid-area: preview;
+  position: relative;
   width: 285px;
+}
+
+.cursor-coordinates {
+width: 150px;
+height: 20px;
+position: absolute;
+bottom: 10px;
+font-weight: bold;
 }
 
 .preview-conteiner {
