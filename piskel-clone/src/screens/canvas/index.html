@@ -73,8 +73,8 @@
         <input type='button' class='preview-button'></input>
         <canvas class='preview-canvas'></canvas>
         <div class='control'>
-          <p class='control-fps'>3 FPS</p>
-          <input type='range' id='sizeFPS' min='0' max='12' step='3' value='3' />
+          <p class='control-fps'>1 FPS</p>
+          <input type='range' id='sizeFPS' min='0' max='24' step='1' value='1' />
         </div>
       </div>
       <div class="setting-resize-conteiner conteiner">
@@ -99,6 +99,12 @@
         </form>
       </div>
       <div class="export-canvas-conteiner conteiner">
+        <form action="" class="export-canvas-form" name="export-canvas-form">
+          <legend>Export</legend>
+          <label class="export-name__label" style="line-height:20px;">Convert your sprite to an animated GIF. </label>
+          <input type="image" value="save" id="export-button" />
+          <label class="export-button__label" for="export-button">Download</label>
+        </form>
       </div>
       <div class="import-canvas-conteiner conteiner">
         <form action="" class="import-canvas-form" name="import-canvas-form">

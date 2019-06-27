@@ -4,12 +4,13 @@ import FrameList from './components/frame-list/FrameList';
 import Resize from './components/model-dialog/Resize/Resize';
 import Save from './screens/export/save/Save';
 import Import from './screens/import/Import';
+import Export from './screens/export/Export';
 
 const penSizeConteiner = document.querySelector('.pen-size-conteiner');
 const toolsConteiner = document.querySelector('.tools-conteiner');
 const settingsConteiner = document.querySelector('.settings-conteiner__list');
 const swapColors = document.querySelector('#swap-colors');
-const buttonAddFrame = document.getElementById('addFrame');
+// const buttonAddFrame = document.getElementById('addFrame');
 // const sizeFPS = document.getElementById('sizeFPS');
 
 const state = {
@@ -29,6 +30,18 @@ save.init();
 
 const importF = new Import();
 importF.init();
+
+const exportF = new Export();
+exportF.init();
+
+// buttonAddFrame.addEventListener('click', () => {
+const frameList = new FrameList();
+frameList.render();
+// });
+
+const preview = new Preview();
+preview.init();
+
 
 penSizeConteiner.addEventListener('click', (event) => {
   const arrSize = event.target.parentNode.children;
@@ -131,10 +144,10 @@ settingsConteiner.addEventListener('click', (event) => {
     } else {
       for (let i = 0; i < arrSetting.children.length; i += 1) {
         arrSetting.children[i].children[0].classList.remove('settings-conteiner__item_button-active');
-        settingSaveConteiner.style.display = 'none';
-        settingImportConteiner.style.display = 'none';
-        settingExportConteiner.style.display = 'none';
       }
+      settingSaveConteiner.style.display = 'none';
+      settingImportConteiner.style.display = 'none';
+      settingExportConteiner.style.display = 'none';
       state.correntSettingTool = 'settingResize';
       event.target.parentNode.classList.add('settings-conteiner__item_button-active');
       settingResizeConteiner.style.display = 'block';
@@ -147,10 +160,10 @@ settingsConteiner.addEventListener('click', (event) => {
     } else {
       for (let i = 0; i < arrSetting.children.length; i += 1) {
         arrSetting.children[i].children[0].classList.remove('settings-conteiner__item_button-active');
-        settingResizeConteiner.style.display = 'none';
-        settingImportConteiner.style.display = 'none';
-        settingExportConteiner.style.display = 'none';
       }
+      settingResizeConteiner.style.display = 'none';
+      settingImportConteiner.style.display = 'none';
+      settingExportConteiner.style.display = 'none';
       state.correntSettingTool = 'settingSave';
       event.target.parentNode.classList.add('settings-conteiner__item_button-active');
       settingSaveConteiner.style.display = 'block';
@@ -163,12 +176,13 @@ settingsConteiner.addEventListener('click', (event) => {
     } else {
       for (let i = 0; i < arrSetting.children.length; i += 1) {
         arrSetting.children[i].children[0].classList.remove('settings-conteiner__item_button-active');
-        settingResizeConteiner.style.display = 'none';
-        settingSaveConteiner.style.display = 'none';
-        settingImportConteiner.style.display = 'none';
       }
+      settingResizeConteiner.style.display = 'none';
+      settingSaveConteiner.style.display = 'none';
+      settingImportConteiner.style.display = 'none';
       state.correntSettingTool = 'settingExport';
       event.target.parentNode.classList.add('settings-conteiner__item_button-active');
+      settingExportConteiner.style.display = 'block';
     }
   } else if (event.target.parentNode.id === 'setting-import') {
     if (state.correntSettingTool === 'settingImport') {
@@ -178,10 +192,10 @@ settingsConteiner.addEventListener('click', (event) => {
     } else {
       for (let i = 0; i < arrSetting.children.length; i += 1) {
         arrSetting.children[i].children[0].classList.remove('settings-conteiner__item_button-active');
-        settingResizeConteiner.style.display = 'none';
-        settingSaveConteiner.style.display = 'none';
-        settingExportConteiner.style.display = 'none';
       }
+      settingResizeConteiner.style.display = 'none';
+      settingSaveConteiner.style.display = 'none';
+      settingExportConteiner.style.display = 'none';
       state.correntSettingTool = 'settingImport';
       event.target.parentNode.classList.add('settings-conteiner__item_button-active');
       settingImportConteiner.style.display = 'block';
@@ -193,12 +207,4 @@ swapColors.addEventListener('click', () => {
   const primaryColor = document.querySelector('.color-conteiner__primary_item').value;
   document.querySelector('.color-conteiner__primary_item').value = document.querySelector('.color-conteiner__secondary_item').value;
   document.querySelector('.color-conteiner__secondary_item').value = primaryColor;
-});
-
-buttonAddFrame.addEventListener('click', () => {
-  const frameList = new FrameList();
-  frameList.render();
-
-  const preview = new Preview();
-  preview.init();
 });

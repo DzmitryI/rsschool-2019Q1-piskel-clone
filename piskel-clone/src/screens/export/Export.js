@@ -1,12 +1,12 @@
-import './import.scss';
+import './export.scss';
 
-export default class Import {
+export default class Export {
   constructor() {
     this.form = document;
   }
 
   init() {
-    const ImportButton = this.form.getElementById('import-button');
+    const ImportButton = this.form.getElementById('export-button');
     ImportButton.addEventListener('change', this.change.bind(this));
   }
 
