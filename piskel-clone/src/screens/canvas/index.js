@@ -88,7 +88,7 @@ export default class Index {
     this.canvasData64 = canvasData64;
     this.canvasData128 = canvasData128;
     canvas.addEventListener('mousedown', this.mouseDown.bind(this));
-    canvas.addEventListener('mousemove', this.mouseCoordinates.bind(this));
+    canvas.addEventListener('mousemove', this.mouseCoordinatesMove.bind(this));
     canvas.addEventListener('mouseout', this.mouseCoordinatesOut.bind(this));
   }
 
@@ -120,6 +120,9 @@ export default class Index {
       } else this.size = 0;
       const { size } = this;
       canvas.onmousemove = this.onmousemove.bind(this);
+      canvas.onmouseout = () => {
+        canvas.onmousemove = null;
+      };
       canvas.onmouseup = () => {
         canvas.onmousemove = null;
       };
@@ -296,27 +299,27 @@ export default class Index {
     const ctx = canvas.getContext('2d');
     const resizeArr = this.form.getElementsByName('resize');
     const currentResize = +[].filter.call(resizeArr, item => item.checked)[0].value;
-    let canvasData = [];
-    if (currentResize === 32) canvasData = this.canvasData32;
-    else if (currentResize === 64) canvasData = this.canvasData64;
-    else if (currentResize === 128) canvasData = this.canvasData128;
+    let canvData = [];
+    if (currentResize === 32) canvData = this.canvasData32;
+    else if (currentResize === 64) canvData = this.canvasData64;
+    else if (currentResize === 128) canvData = this.canvasData128;
     if (event.which === 1) ctx.fillStyle = primaryColor;
     else if (event.which === 3) ctx.fillStyle = secondaryColor;
     const x = event.offsetX;
     const y = event.offsetY;
-    // window.console.log(x, y);
-    for (let i = 0; i < canvasData.length; i += 1) {
-      const xi = canvasData[i][0] + canvasData[i][2];
-      const yi = canvasData[i][1] + canvasData[i][3];
+    for (let i = 0; i < canvData.length; i += 1) {
+      const xi = canvData[i][0] + canvData[i][2];
+      const yi = canvData[i][1] + canvData[i][3];
+      const { size } = this;
       if ((x <= xi) && (y <= yi)) {
         // eslint-disable-next-line max-len
-        ctx.fillRect(canvasData[i][0] - this.size, canvasData[i][1] - this.size, canvasData[i][2] + this.size, canvasData[i][3] + this.size);
+        ctx.fillRect(canvData[i][0] - size, canvData[i][1] - size, canvData[i][2] + size, canvData[i][3] + size);
         break;
       }
     }
   }
 
-  mouseCoordinates(event) {
+  mouseCoordinatesMove(event) {
     const resizeArr = this.form.getElementsByName('resize');
     const cursorCoordinates = this.form.querySelector('.cursor-coordinates');
     const currentResize = +[].filter.call(resizeArr, item => item.checked)[0].value;
@@ -330,7 +333,6 @@ export default class Index {
       const xi = canvasData[i][0] + canvasData[i][2];
       const yi = canvasData[i][1] + canvasData[i][3];
       if ((x <= xi) && (y <= yi)) {
-        // eslint-disable-next-line max-len
         cursorCoordinates.innerHTML = `[ ${currentResize}x${currentResize} ] ${canvasData[i][4]} : ${canvasData[i][5]}`;
         break;
       }
