@@ -17,7 +17,7 @@ body {
 .main {
   display: grid;
   grid-gap: 15px;
-  grid-template-columns: 1fr 1fr 6fr 3fr 1fr;
+  grid-template-columns: 1fr 1fr 16fr 2fr 1fr;
   grid-template-rows: 1fr 1fr;
   grid-template-areas: "control frame canvas preview settings"
   "control frame canvas preview settings";
@@ -237,6 +237,7 @@ img {
 
 .preview-and-setting-conteiner {
   grid-area: preview;
+  width: 285px;
 }
 
 .preview-conteiner {

@@ -13,6 +13,7 @@ import swapColrsIcon from '../../assets/images/icons/tools/swap_color.png';
 import settingResizeIcon from '../../assets/images/icons/settings/settings-resize.png';
 import settingSeveIcon from '../../assets/images/icons/settings/settings-save.png';
 import settingExportIcon from '../../assets/images/icons/settings/settings-export.png';
+import settingImportIcon from '../../assets/images/icons/settings/settings-open-folder.png';
 
 export default class Index {
   constructor() {
@@ -45,6 +46,8 @@ export default class Index {
     save.src = settingSeveIcon;
     const exportIcon = this.form.getElementById('setting-export-img');
     exportIcon.src = settingExportIcon;
+    const importIcon = this.form.getElementById('setting-import-img');
+    importIcon.src = settingImportIcon;
 
     const move = this.form.getElementById('move');
     move.src = moveIcon;

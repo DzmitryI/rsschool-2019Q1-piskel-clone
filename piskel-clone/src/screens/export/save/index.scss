@@ -1,9 +1,9 @@
-.export-canvas-conteiner {
+.save-canvas-conteiner {
   display: none;
   height: 130px;
 }
 
-.export-canvas-form {
+.save-canvas-form {
   margin: 0 auto;
   height: 100%;
   border: 1px solid rgba(0,0,0,.2);
@@ -11,21 +11,21 @@
   background: rgba(0, 0, 0, 0.5);
 }
 
-// .export-canvas-form__wrap {
-//   padding-left: 5px;
-// }
+.save-canvas-form__wrap {
+  padding-left: 5px;
+}
 
-// #save-name {
-//   border: 1px solid rgba(255,255,255,.4);
-//   border-radius: 4px;
-//   display: block;
-//   font-size:18px;
-//   font-weight: 300;
-//   padding-left:20px;
-//   padding-right:20px;
-// }
+#save-name {
+  border: 1px solid rgba(255,255,255,.4);
+  border-radius: 4px;
+  display: block;
+  font-size:18px;
+  font-weight: 300;
+  padding-left:20px;
+  padding-right:20px;
+}
 
-.export-button {
+.save-button {
   position: relative;
   left: 50%;
   top: 10px;
@@ -41,7 +41,7 @@
   color: #e1e1e1;
 }
 
-.export-button:hover {
+.save-button:hover {
   border: 1px solid #253737;
   text-shadow: #333333 0 1px 0;
   background: #416b68;
@@ -54,7 +54,7 @@
   color: #fff;
 }
 
-.export-button:active {
+.save-button:active {
   margin-top:1px;
   text-shadow: #333333 0 -1px 0;
   border: 1px solid #333333;

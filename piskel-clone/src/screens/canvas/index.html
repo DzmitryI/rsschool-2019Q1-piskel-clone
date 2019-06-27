@@ -98,6 +98,16 @@
           <input type="submit" class="save-button" value="Save as .piskel" />
         </form>
       </div>
+      <div class="export-canvas-conteiner conteiner">
+      </div>
+      <div class="import-canvas-conteiner conteiner">
+        <form action="" class="import-canvas-form" name="import-canvas-form">
+          <legend>Load .piskel file</legend>
+          <label class="import-name__label" style="line-height:20px;">Load a.piskel file from your computer </label>
+          <input type="file" id="import-button" />
+          <label class="import-button__label" for="import-button">Browse .piskel files</label>
+        </form>
+      </div>
     </div>
     <div class="settings-conteiner conteiner">
       <ul class="settings-conteiner__list palette-list">
@@ -114,6 +124,11 @@
         <li class="settings-conteiner__item">
           <button id="setting-export" class="settings-conteiner__item_button">
             <img id="setting-export-img" alt="tool export" />
+          </button>
+        </li>
+        <li class="settings-conteiner__item">
+          <button id="setting-import" type="file" class="settings-conteiner__item_button">
+            <img id="setting-import-img" alt="tool import" />
           </button>
         </li>
       </ul>
