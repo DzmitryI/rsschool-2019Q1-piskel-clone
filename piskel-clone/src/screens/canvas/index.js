@@ -57,10 +57,8 @@ export default class Index {
     swapColors.src = swapColrsIcon;
 
     const canvas = this.form.querySelector('.canvas-conteiner__canvas');
-    // const ctx = canvas.getContext('2d');
-    // ctx.fillStyle = 'brown';
-    // const resizeArr = this.form.getElementsByName('resize');
-    // const currentResize = +[].filter.call(resizeArr, item => item.checked)[0].value;
+    const ctx = canvas.getContext('2d');
+    ctx.fillStyle = 'rgba(100,150,185,0.1)';
     const x32 = canvas.width / 32;
     const x64 = canvas.width / 64;
     const x128 = canvas.width / 128;
@@ -82,8 +80,7 @@ export default class Index {
         canvasData128.push([j * x128, i * x128, x128, x128, j, i]);
       }
     }
-    // ctx.rect(0, 0, 400, 400);
-    // ctx.stroke();
+    ctx.fillRect(0, 0, 400, 400);
     this.canvasData32 = canvasData32;
     this.canvasData64 = canvasData64;
     this.canvasData128 = canvasData128;
@@ -144,8 +141,9 @@ export default class Index {
         const yi = canvasData[i][1] + canvasData[i][3];
         if ((x <= xi) && (y <= yi)) {
           // eslint-disable-next-line max-len
-          ctx.fillRect(canvasData[i][0] - size, canvasData[i][1] - size, canvasData[i][2] + size, canvasData[i][3] + size);
-          ctx.stroke();
+          ctx.clearRect(canvasData[i][0] - size, canvasData[i][1] - size, canvasData[i][2] + size, canvasData[i][3] + size);
+          // eslint-disable-next-line max-len
+          ctx.fillRect(canvasData[i][0] - size, canvasData[i][1] - size, canvasData[i][2] + size + 1, canvasData[i][3] + size + 1);
           break;
         }
       }
@@ -187,6 +185,7 @@ export default class Index {
       // eslint-disable-next-line no-param-reassign
       colorLayerData.data[pixelPos + 2] = b;
       // eslint-disable-next-line no-param-reassign
+      colorLayerData.data[pixelPos + 3] = 255;
       // colorLayerData.data[pixelPos + 3] = a !== undefined ? a : 255;
     }
 
@@ -233,7 +232,6 @@ export default class Index {
           colorPixel(pixelPos, primaryColor.r, primaryColor.g, primaryColor.b, colorData);
 
           if (x > 0) {
-            window.console.log(`x > 0${x}`);
             if (matchStartColor(pixelPos - 4, startR, startG, startB, colorData)) {
               if (!reachLeft) {
                 //     // Add pixel to stack
@@ -245,10 +243,8 @@ export default class Index {
             }
           }
           if (x < 400) {
-            window.console.log(`x < 400${x}`);
             if (matchStartColor(pixelPos + 4, startR, startG, startB, outlineData)) {
               if (!reachRight) {
-                // Add pixel to stack
                 pixelStack.push([x + 1, y]);
                 reachRight = true;
               }
@@ -264,6 +260,7 @@ export default class Index {
     if (toolPaintBucket.classList[1] === 'tools-conteiner__item_button-active') {
       const canvas = event.target.parentNode.children[0];
       // const primaryColor = this.form.querySelector('.color-conteiner__primary_item').value;
+      const primaryColor = hex2rgb(document.querySelector('.color-conteiner__primary_item').value);
       // const secondaryColor = this.form.querySelector('.color-conteiner__secondary_item').value;
 
       const ctx = canvas.getContext('2d');
@@ -286,8 +283,9 @@ export default class Index {
       const b = outlineLayerData.data[pixelPos + 2];
 
       window.console.log(r, g, b);
-
-      floodFill(startX, startY, r, g, b, canvas.clientWidth, outlineLayerData, colorLayerData);
+      if ((r !== primaryColor.r || g !== primaryColor.g || b !== primaryColor.b)) {
+        floodFill(startX, startY, r, g, b, canvas.clientWidth, outlineLayerData, colorLayerData);
+      }
       ctx.putImageData(colorLayerData, 0, 0);
     }
   }
@@ -313,7 +311,9 @@ export default class Index {
       const { size } = this;
       if ((x <= xi) && (y <= yi)) {
         // eslint-disable-next-line max-len
-        ctx.fillRect(canvData[i][0] - size, canvData[i][1] - size, canvData[i][2] + size, canvData[i][3] + size);
+        ctx.clearRect(canvData[i][0] - size, canvData[i][1] - size, canvData[i][2] + size, canvData[i][3] + size);
+        // eslint-disable-next-line max-len
+        ctx.fillRect(canvData[i][0] - size, canvData[i][1] - size, canvData[i][2] + size + 1, canvData[i][3] + size + 1);
         break;
       }
     }

@@ -24,5 +24,7 @@ export default class Resize {
     const canvas = this.form.querySelector('.canvas-conteiner__canvas');
     const ctx = canvas.getContext('2d');
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = 'rgba(100,150,185,0.1)';
+    ctx.fillRect(0, 0, 400, 400);
   }
 }
