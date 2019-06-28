@@ -1,4 +1,4 @@
-import './style.scss';
+import './frameList.scss';
 
 import backgroundCanvasImg from '../../assets/images/canvas-backgrounds/canvas-background-light.png';
 
@@ -40,7 +40,6 @@ export default class FrameList {
     containerCurrentFrame.appendChild(canvasFr);
     containerFrame.insertBefore(containerCurrentFrame, addButton);
     containerFrame.addEventListener('mousedown', this.mouseDown.bind(this));
-    // buttonCanvasFrameDel.addEventListener('mousedown', this.mouseDown.bind(this));
 
     const cols = document.querySelectorAll('.draggable');
     [].forEach.call(cols, (col) => {
@@ -83,6 +82,16 @@ export default class FrameList {
         col.addEventListener('drop', this.handleDrop.bind(this));
         col.addEventListener('dragend', this.handleDragEnd.bind(this));
       });
+    } else if (event.target.classList[0] === 'canvas-frame') {
+      if (![].some.call(event.target.parentNode.classList, item => item === 'container-current-frame-activ')) {
+        [].map.call(event.target.parentNode.parentNode.children, item => item.classList.remove('container-current-frame-activ'));
+        event.target.parentNode.classList.add('container-current-frame-activ');
+        const canvas = this.form.querySelector('.canvas-conteiner__canvas');
+        const ctx = canvas.getContext('2d');
+        const canvFr = event.target;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(canvFr, 0, 0, canvFr.width, canvFr.height, 0, 0, canvas.width, canvas.height);
+      }
     }
     event.stopImmediatePropagation();
   }

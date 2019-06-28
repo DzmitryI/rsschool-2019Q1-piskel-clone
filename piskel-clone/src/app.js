@@ -34,10 +34,8 @@ importF.init();
 const exportF = new Export();
 exportF.init();
 
-// buttonAddFrame.addEventListener('click', () => {
 const frameList = new FrameList();
 frameList.render();
-// });
 
 const preview = new Preview();
 preview.init();

@@ -118,6 +118,24 @@ export default class Index {
       const { size } = this;
       canvas.onmousemove = this.onmousemove.bind(this);
       canvas.onmouseout = () => {
+        const frameConteiner = this.form.querySelector('.frame-container');
+        let res;
+        let curElem;
+        for (let i = 0; i < frameConteiner.children.length; i += 1) {
+          const element = frameConteiner.children[i];
+          res = [].indexOf.call(element.classList, 'container-current-frame-activ');
+          if (res !== -1) {
+            // eslint-disable-next-line prefer-destructuring
+            curElem = element.children[4];
+            break;
+          }
+        }
+        if (curElem) {
+          const ctx = curElem.getContext('2d');
+          ctx.clearRect(0, 0, curElem.width, curElem.height);
+          // eslint-disable-next-line max-len
+          ctx.drawImage(canvas, 0, 0, canvas.width, canvas.height, 0, 0, curElem.width, curElem.height);
+        }
         canvas.onmousemove = null;
       };
       canvas.onmouseup = () => {
@@ -153,27 +171,9 @@ export default class Index {
       const r = imgData.data[pixelPos];
       const g = imgData.data[pixelPos + 1];
       const b = imgData.data[pixelPos + 2];
-      // let a = imgData.data[pixelPos + 3];
-
-      // If current pixel of the outline image is black
-      // if (matchOutlineColor(r, g, b, a)) {
-      //   return false;
-      // }
-
-      // r = colorLayerData.data[pixelPos];
-      // g = colorLayerData.data[pixelPos + 1];
-      // b = colorLayerData.data[pixelPos + 2];
-
-      // If the current pixel matches the clicked color
       if (r === startR && g === startG && b === startB) {
         return true;
       }
-
-      // If current pixel matches the new color
-      // if (r === curColor.r && g === curColor.g && b === curColor.b) {
-      //   return false;
-      // }
-
       return false;
     }
 
@@ -186,7 +186,6 @@ export default class Index {
       colorLayerData.data[pixelPos + 2] = b;
       // eslint-disable-next-line no-param-reassign
       colorLayerData.data[pixelPos + 3] = 255;
-      // colorLayerData.data[pixelPos + 3] = a !== undefined ? a : 255;
     }
 
     function hex2rgb(c) {
@@ -216,7 +215,6 @@ export default class Index {
 
         let pixelPos = (y * canvasWidth + x) * 4;
 
-        // Go up as long as the color matches and are inside the canvas
         while (y >= 0 && matchStartColor(pixelPos, startR, startG, startB, colorData)) {
           y -= 1;
           pixelPos -= canvasWidth * 4;
@@ -234,7 +232,6 @@ export default class Index {
           if (x > 0) {
             if (matchStartColor(pixelPos - 4, startR, startG, startB, colorData)) {
               if (!reachLeft) {
-                //     // Add pixel to stack
                 pixelStack.push([x - 1, y]);
                 reachLeft = true;
               }
@@ -259,24 +256,12 @@ export default class Index {
 
     if (toolPaintBucket.classList[1] === 'tools-conteiner__item_button-active') {
       const canvas = event.target.parentNode.children[0];
-      // const primaryColor = this.form.querySelector('.color-conteiner__primary_item').value;
       const primaryColor = hex2rgb(document.querySelector('.color-conteiner__primary_item').value);
-      // const secondaryColor = this.form.querySelector('.color-conteiner__secondary_item').value;
-
       const ctx = canvas.getContext('2d');
       const colorLayerData = ctx.getImageData(0, 0, canvas.clientWidth, canvas.clientHeight);
       const outlineLayerData = ctx.getImageData(0, 0, canvas.clientWidth, canvas.clientHeight);
-      // window.console.log(imgData);
-      // for (let i = 0; i < imgData.data.length; i += 4) {
-      //   imgData.data[i] = 255 - imgData.data[i];
-      //   imgData.data[i + 1] = 255 - imgData.data[i + 1];
-      //   imgData.data[i + 2] = 255 - imgData.data[i + 2];
-      //   imgData.data[i + 3] = 255;
-      // }
       const startX = event.offsetX;
       const startY = event.offsetY;
-      // window.console.log(startX, startY);
-
       const pixelPos = (startY * canvas.clientWidth + startX) * 4;
       const r = outlineLayerData.data[pixelPos];
       const g = outlineLayerData.data[pixelPos + 1];
