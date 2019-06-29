@@ -2,11 +2,11 @@ import './index.scss';
 import penIcon from '../../assets/images/icons/tools/tool-pen.png';
 import paintBacketIcon from '../../assets/images/icons/tools/tool-paint-bucket.png';
 import eraserIcon from '../../assets/images/icons/tools/tool-eraser.png';
+import strokeIcon from '../../assets/images/icons/tools/tool-stroke.png';
 
 import backgroundCanvasImg from '../../assets/images/canvas-backgrounds/canvas-background-light.png';
 
 import framePlusIcon from '../../assets/images/icons/frame/frame-plus.png';
-import moveIcon from '../../assets/images/icons/tools/move.png';
 import transformBacketIcon from '../../assets/images/icons/tools/transform.png';
 import swapColrsIcon from '../../assets/images/icons/tools/swap_color.png';
 
@@ -21,7 +21,10 @@ export default class Index {
     this.canvasData32 = [];
     this.canvasData64 = [];
     this.canvasData128 = [];
-    this.size = 0;
+    this.sizePen = 0;
+    this.currentResizeCanvas = 0;
+    this.startX = 0;
+    this.startY = 0;
   }
 
   start() {
@@ -33,6 +36,8 @@ export default class Index {
     paintBacket.src = paintBacketIcon;
     const eraser = this.form.getElementById('tool-eraser-img');
     eraser.src = eraserIcon;
+    const stroke = this.form.getElementById('tool-stroke-img');
+    stroke.src = strokeIcon;
 
     const backgroundCanvas = this.form.querySelector('.canvas-conteiner__canvas');
     backgroundCanvas.style.backgroundImage = `url(${backgroundCanvasImg})`;
@@ -49,8 +54,6 @@ export default class Index {
     const importIcon = this.form.getElementById('setting-import-img');
     importIcon.src = settingImportIcon;
 
-    const move = this.form.getElementById('move');
-    move.src = moveIcon;
     const transform = this.form.getElementById('transform');
     transform.src = transformBacketIcon;
     const swapColors = this.form.getElementById('swap-colors');
@@ -84,38 +87,39 @@ export default class Index {
     this.canvasData32 = canvasData32;
     this.canvasData64 = canvasData64;
     this.canvasData128 = canvasData128;
-    canvas.addEventListener('mousedown', this.mouseDown.bind(this));
-    canvas.addEventListener('mousemove', this.mouseCoordinatesMove.bind(this));
-    canvas.addEventListener('mouseout', this.mouseCoordinatesOut.bind(this));
+    // canvas.addEventListener('mousedown', this.mouseDown.bind(this));
+    // canvas.addEventListener('mousemove', this.mouseCoordinatesMove.bind(this));
+    // canvas.addEventListener('mouseout', this.mouseCoordinatesOut.bind(this));
   }
 
   mouseDown(event) {
     const toolPen = document.querySelector('#tool-pen');
     const toolPaintBucket = document.querySelector('#tool-paint-bucket');
     const toolEraser = document.querySelector('#tool-eraser');
+    // const toolStroke = document.querySelector('#tool-stroke');
+    const canvas = event.target.parentNode.children[0];
+    const resizeArr = this.form.getElementsByName('resize');
+    this.currentResizeCanvas = +[].filter.call(resizeArr, item => item.checked)[0].value;
+    const penSize = document.querySelector('#pen-size').children;
+    let currenPenSize = '';
+    for (let i = 0; i < penSize.length; i += 1) {
+      if (penSize[i].classList[2] === 'tools-conteiner__item_button-active') {
+        // eslint-disable-next-line prefer-destructuring
+        currenPenSize = penSize[i].classList[1];
+      }
+    }
+    if (currenPenSize === 'pen-size-item2px') {
+      this.sizePen = canvas.width / this.currentResizeCanvas;
+    } else if (currenPenSize === 'pen-size-item3px') {
+      this.sizePen = canvas.width / this.currentResizeCanvas * 2;
+    } else if (currenPenSize === 'pen-size-item4px') {
+      this.sizePen = canvas.width / this.currentResizeCanvas * 3;
+    } else this.sizePen = 0;
+    const { sizePen } = this;
     if ((toolPen.classList[1] === 'tools-conteiner__item_button-active')
       || (toolEraser.classList[1] === 'tools-conteiner__item_button-active')) {
-      const penSize = document.querySelector('#pen-size').children;
       const primaryColor = this.form.querySelector('.color-conteiner__primary_item').value;
       const secondaryColor = this.form.querySelector('.color-conteiner__secondary_item').value;
-      const canvas = event.target.parentNode.children[0];
-      let currenPenSize = '';
-      const resizeArr = this.form.getElementsByName('resize');
-      const currentResize = +[].filter.call(resizeArr, item => item.checked)[0].value;
-      for (let i = 0; i < penSize.length; i += 1) {
-        if (penSize[i].classList[2] === 'tools-conteiner__item_button-active') {
-          // eslint-disable-next-line prefer-destructuring
-          currenPenSize = penSize[i].classList[1];
-        }
-      }
-      if (currenPenSize === 'pen-size-item2px') {
-        this.size = canvas.width / currentResize;
-      } else if (currenPenSize === 'pen-size-item3px') {
-        this.size = canvas.width / currentResize * 2;
-      } else if (currenPenSize === 'pen-size-item4px') {
-        this.size = canvas.width / currentResize * 3;
-      } else this.size = 0;
-      const { size } = this;
       canvas.onmousemove = this.onmousemove.bind(this);
       canvas.onmouseout = () => {
         const frameConteiner = this.form.querySelector('.frame-container');
@@ -138,14 +142,12 @@ export default class Index {
         }
         canvas.onmousemove = null;
       };
-      canvas.onmouseup = () => {
-        canvas.onmousemove = null;
-      };
+
       const ctx = canvas.getContext('2d');
       let canvasData = [];
-      if (currentResize === 32) canvasData = this.canvasData32;
-      else if (currentResize === 64) canvasData = this.canvasData64;
-      else if (currentResize === 128) canvasData = this.canvasData128;
+      if (this.currentResizeCanvas === 32) canvasData = this.canvasData32;
+      else if (this.currentResizeCanvas === 64) canvasData = this.canvasData64;
+      else if (this.currentResizeCanvas === 128) canvasData = this.canvasData128;
       if (event.which === 1) ctx.fillStyle = primaryColor;
       else if (event.which === 3) ctx.fillStyle = secondaryColor;
       if (toolEraser.classList[1] === 'tools-conteiner__item_button-active') {
@@ -159,9 +161,9 @@ export default class Index {
         const yi = canvasData[i][1] + canvasData[i][3];
         if ((x <= xi) && (y <= yi)) {
           // eslint-disable-next-line max-len
-          ctx.clearRect(canvasData[i][0] - size, canvasData[i][1] - size, canvasData[i][2] + size, canvasData[i][3] + size);
+          ctx.clearRect(canvasData[i][0] - sizePen, canvasData[i][1] - sizePen, canvasData[i][2] + sizePen, canvasData[i][3] + sizePen);
           // eslint-disable-next-line max-len
-          ctx.fillRect(canvasData[i][0] - size, canvasData[i][1] - size, canvasData[i][2] + size + 1, canvasData[i][3] + size + 1);
+          ctx.fillRect(canvasData[i][0] - sizePen, canvasData[i][1] - sizePen, canvasData[i][2] + sizePen + 1, canvasData[i][3] + sizePen + 1);
           break;
         }
       }
@@ -255,7 +257,7 @@ export default class Index {
     }
 
     if (toolPaintBucket.classList[1] === 'tools-conteiner__item_button-active') {
-      const canvas = event.target.parentNode.children[0];
+      // const canvas = event.target.parentNode.children[0];
       const primaryColor = hex2rgb(document.querySelector('.color-conteiner__primary_item').value);
       const ctx = canvas.getContext('2d');
       const colorLayerData = ctx.getImageData(0, 0, canvas.clientWidth, canvas.clientHeight);
@@ -273,7 +275,131 @@ export default class Index {
       }
       ctx.putImageData(colorLayerData, 0, 0);
     }
+
+    // if (toolStroke.classList[1] === 'tools-conteiner__item_button-active') {
+    //   canvas.onmouseup = this.onmousemoveStroke.bind(this);
+    // }
   }
+
+  // onmousemoveStroke(event) {
+  //   const curX = event.offsetX;
+  //   const curY = event.offsetY;
+  //   // console.log(this.startX, this.startY);
+
+  //   const pixel = (x, y) => {
+  //     // console.log(x, y);
+  //     const primaryColor = this.form.querySelector('.color-conteiner__primary_item').value;
+  //     const secondaryColor = this.form.querySelector('.color-conteiner__secondary_item').value;
+  //     const canvas = event.target.parentNode.children[0];
+  //     const ctx = canvas.getContext('2d');
+  //     let canvasData = [];
+  //     if (this.currentResizeCanvas === 32) canvasData = this.canvasData32;
+  //     else if (this.currentResizeCanvas === 64) canvasData = this.canvasData64;
+  //     else if (this.currentResizeCanvas === 128) canvasData = this.canvasData128;
+  //     if (event.which === 1) ctx.fillStyle = primaryColor;
+  //     else if (event.which === 3) ctx.fillStyle = secondaryColor;
+  //     const { sizePen } = this;
+  //     for (let i = 0; i < canvasData.length; i += 1) {
+  //       const xi = canvasData[i][0] + canvasData[i][2];
+  //       const yi = canvasData[i][1] + canvasData[i][3];
+  //       if ((x <= xi) && (y <= yi)) {
+  // eslint-disable-next-line max-len
+  //         ctx.clearRect(canvasData[i][0] - sizePen, canvasData[i][1] - sizePen, canvasData[i][2] + sizePen, canvasData[i][3] + sizePen);
+  // eslint-disable-next-line max-len
+  //         ctx.fillRect(canvasData[i][0] - sizePen, canvasData[i][1] - sizePen, canvasData[i][2] + sizePen + 1, canvasData[i][3] + sizePen + 1);
+  //         break;
+  //       }
+  //     }
+  //   };
+
+  //   const drawLine = (x1, y1, x2, y2) => {
+  //     let x;
+  //     let y;
+  //     // let dx;
+  //     // let dy;
+  //     // let dx1;
+  //     // let dy1;
+  //     let px;
+  //     let py;
+  //     let xe;
+  //     let ye;
+  //     let i;
+
+  //     // Calculate line deltas
+  //     const dx = x2 - x1;
+  //     const dy = y2 - y1;
+
+  //     // Create a positive copy of deltas (makes iterating easier)
+  //     const dx1 = Math.abs(dx);
+  //     const dy1 = Math.abs(dy);
+
+  //     // Calculate error intervals for both axis
+  //     px = 2 * dy1 - dx1;
+  //     py = 2 * dx1 - dy1;
+
+  //     // The line is X-axis dominant
+  //     if (dy1 <= dx1) {
+  //       // Line is drawn left to right
+  //       if (dx >= 0) {
+  //         x = x1; y = y1; xe = x2;
+  //       } else { // Line is drawn right to left (swap ends)
+  //         x = x2; y = y2; xe = x1;
+  //       }
+
+  //       pixel(x, y); // Draw first pixel
+
+  //       // Rasterize the line
+  //       for (i = 0; x < xe; i += 1) {
+  //         x += 1;
+
+  //         // Deal with octants...
+  //         if (px < 0) {
+  //           px += 2 * dy1;
+  //         } else {
+  //           if ((dx < 0 && dy < 0) || (dx > 0 && dy > 0)) {
+  //             y += 1;
+  //           } else {
+  //             y -= 1;
+  //           }
+  //           px += 2 * (dy1 - dx1);
+  //         }
+
+  //         // Draw pixel from line span at currently rasterized position
+  //         pixel(x, y);
+  //       }
+  //     } else { // The line is Y-axis dominant
+  //       // Line is drawn bottom to top
+  //       if (dy >= 0) {
+  //         x = x1; y = y1; ye = y2;
+  //       } else { // Line is drawn top to bottom
+  //         x = x2; y = y2; ye = y1;
+  //       }
+
+  //       pixel(x, y); // Draw first pixel
+
+  //       // Rasterize the line
+  //       for (i = 0; y < ye; i += 1) {
+  //         y += 1;
+
+  //         // Deal with octants...
+  //         if (py <= 0) {
+  //           py += 2 * dx1;
+  //         } else {
+  //           if ((dx < 0 && dy < 0) || (dx > 0 && dy > 0)) {
+  //             x += 1;
+  //           } else {
+  //             x -= 1;
+  //           }
+  //           py += 2 * (dx1 - dy1);
+  //         }
+
+  //         // Draw pixel from line span at currently rasterized position
+  //         pixel(x, y);
+  //       }
+  //     }
+  //   };
+  //   drawLine(this.startX, this.startY, curX, curY);
+  // }
 
   onmousemove(event) {
     const primaryColor = this.form.querySelector('.color-conteiner__primary_item').value;
@@ -290,6 +416,7 @@ export default class Index {
     else if (event.which === 3) ctx.fillStyle = secondaryColor;
     const x = event.offsetX;
     const y = event.offsetY;
+    console.log(x, y);
     for (let i = 0; i < canvData.length; i += 1) {
       const xi = canvData[i][0] + canvData[i][2];
       const yi = canvData[i][1] + canvData[i][3];
@@ -304,30 +431,31 @@ export default class Index {
     }
   }
 
-  mouseCoordinatesMove(event) {
-    const resizeArr = this.form.getElementsByName('resize');
-    const cursorCoordinates = this.form.querySelector('.cursor-coordinates');
-    const currentResize = +[].filter.call(resizeArr, item => item.checked)[0].value;
-    let canvasData = [];
-    if (currentResize === 32) canvasData = this.canvasData32;
-    else if (currentResize === 64) canvasData = this.canvasData64;
-    else if (currentResize === 128) canvasData = this.canvasData128;
-    const x = event.offsetX;
-    const y = event.offsetY;
-    for (let i = 0; i < canvasData.length; i += 1) {
-      const xi = canvasData[i][0] + canvasData[i][2];
-      const yi = canvasData[i][1] + canvasData[i][3];
-      if ((x <= xi) && (y <= yi)) {
-        cursorCoordinates.innerHTML = `[ ${currentResize}x${currentResize} ] ${canvasData[i][4]} : ${canvasData[i][5]}`;
-        break;
-      }
-    }
-  }
+  // mouseCoordinatesMove(event) {
+  //   const resizeArr = this.form.getElementsByName('resize');
+  //   const cursorCoordinates = this.form.querySelector('.cursor-coordinates');
+  //   const currentResize = +[].filter.call(resizeArr, item => item.checked)[0].value;
+  //   let canvasData = [];
+  //   if (currentResize === 32) canvasData = this.canvasData32;
+  //   else if (currentResize === 64) canvasData = this.canvasData64;
+  //   else if (currentResize === 128) canvasData = this.canvasData128;
+  //   const x = event.offsetX;
+  //   const y = event.offsetY;
+  //   for (let i = 0; i < canvasData.length; i += 1) {
+  //     const xi = canvasData[i][0] + canvasData[i][2];
+  //     const yi = canvasData[i][1] + canvasData[i][3];
+  //     if ((x <= xi) && (y <= yi)) {
+  // eslint-disable-next-line max-len
+  //       cursorCoordinates.innerHTML = `[ ${currentResize}x${currentResize} ] ${canvasData[i][4]} : ${canvasData[i][5]}`;
+  //       break;
+  //     }
+  //   }
+  // }
 
-  mouseCoordinatesOut() {
-    const resizeArr = this.form.getElementsByName('resize');
-    const cursorCoordinates = this.form.querySelector('.cursor-coordinates');
-    const currentResize = +[].filter.call(resizeArr, item => item.checked)[0].value;
-    cursorCoordinates.innerHTML = `[ ${currentResize}x${currentResize} ]`;
-  }
+  // mouseCoordinatesOut() {
+  //   const resizeArr = this.form.getElementsByName('resize');
+  //   const cursorCoordinates = this.form.querySelector('.cursor-coordinates');
+  //   const currentResize = +[].filter.call(resizeArr, item => item.checked)[0].value;
+  //   cursorCoordinates.innerHTML = `[ ${currentResize}x${currentResize} ]`;
+  // }
 }

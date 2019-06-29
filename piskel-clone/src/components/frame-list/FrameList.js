@@ -90,6 +90,7 @@ export default class FrameList {
         const ctx = canvas.getContext('2d');
         const canvFr = event.target;
         ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.imageSmoothingEnabled = false;
         ctx.drawImage(canvFr, 0, 0, canvFr.width, canvFr.height, 0, 0, canvas.width, canvas.height);
       }
     }
