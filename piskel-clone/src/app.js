@@ -11,6 +11,11 @@ import Stroke from './components/tools/Stroke';
 import Eraser from './components/tools/Eraser';
 import PaintBucket from './components/tools/PaintBucket';
 
+import eraserCursorIcon from './assets/images/cursors/eraser.png';
+import strokeCursorIcon from './assets/images/cursors/stroke.png';
+import penCursorIcon from './assets/images/cursors/pen.png';
+import paintBucketCursorIcon from './assets/images/cursors/paint-bucket.png';
+
 import MouseCoordinatesMove from './components/model-dialog/mouseCoordinatesMove';
 
 const penSizeConteiner = document.querySelector('.pen-size-conteiner');
@@ -102,45 +107,53 @@ toolsConteiner.addEventListener('click', (event) => {
     if (state.correntTool === 'toolPen') {
       event.target.parentNode.classList.remove('tools-conteiner__item_button-active');
       state.correntTool = '';
+      canvas.style.cursor = 'default';
     } else {
       for (let i = 0; i < arrSize.length; i += 1) {
         arrSize[i].children[0].classList.remove('tools-conteiner__item_button-active');
       }
       state.correntTool = 'toolPen';
       event.target.parentNode.classList.add('tools-conteiner__item_button-active');
+      canvas.style.cursor = `url(${penCursorIcon}), auto`;
     }
   } else if (event.target.parentNode.id === 'tool-paint-bucket') {
     if (state.correntTool === 'toolPaintBucket') {
       event.target.parentNode.classList.remove('tools-conteiner__item_button-active');
       state.correntTool = '';
+      canvas.style.cursor = 'default';
     } else {
       for (let i = 0; i < arrSize.length; i += 1) {
         arrSize[i].children[0].classList.remove('tools-conteiner__item_button-active');
       }
       state.correntTool = 'toolPaintBucket';
       event.target.parentNode.classList.add('tools-conteiner__item_button-active');
+      canvas.style.cursor = `url(${paintBucketCursorIcon}), auto`;
     }
   } else if (event.target.parentNode.id === 'tool-eraser') {
     if (state.correntTool === 'toolEraser') {
       event.target.parentNode.classList.remove('tools-conteiner__item_button-active');
       state.correntTool = '';
+      canvas.style.cursor = 'default';
     } else {
       for (let i = 0; i < arrSize.length; i += 1) {
         arrSize[i].children[0].classList.remove('tools-conteiner__item_button-active');
       }
       state.correntTool = 'toolEraser';
       event.target.parentNode.classList.add('tools-conteiner__item_button-active');
+      canvas.style.cursor = `url(${eraserCursorIcon}), auto`;
     }
   } else if (event.target.parentNode.id === 'tool-stroke') {
     if (state.correntTool === 'toolStroke') {
       event.target.parentNode.classList.remove('tools-conteiner__item_button-active');
       state.correntTool = '';
+      canvas.style.cursor = 'default';
     } else {
       for (let i = 0; i < arrSize.length; i += 1) {
         arrSize[i].children[0].classList.remove('tools-conteiner__item_button-active');
       }
       state.correntTool = 'toolStroke';
       event.target.parentNode.classList.add('tools-conteiner__item_button-active');
+      canvas.style.cursor = `url(${strokeCursorIcon}), auto`;
     }
   }
 });
