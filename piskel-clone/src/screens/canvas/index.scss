@@ -187,7 +187,7 @@ img {
 
 .frame-container {
   grid-area: frame;
-  width: 170px;
+  width: 185px;
   max-height: 700px;
   overflow: auto;
   display: flex;
@@ -198,7 +198,8 @@ img {
 
 .frame-add-button {
   margin: 10px auto;
-  border: 1px solid rgba(0, 0, 0, 0.25);
+  background: rgb(182, 151, 151);
+  border: none;
   font-family: 'Roboto-Regular';
   border-radius: 5%;
   font-size: 13px;

@@ -6,8 +6,10 @@ import Save from './screens/export/save/Save';
 import Import from './screens/import/Import';
 import Export from './screens/export/Export';
 
+import Pen from './components/tools/Pen';
 import Stroke from './components/tools/Stroke';
 import Eraser from './components/tools/Eraser';
+import PaintBucket from './components/tools/PaintBucket';
 
 import MouseCoordinatesMove from './components/model-dialog/mouseCoordinatesMove';
 
@@ -225,6 +227,8 @@ swapColors.addEventListener('click', () => {
 canvas.addEventListener('mousedown', (event) => {
   const toolStroke = document.querySelector('#tool-stroke');
   const toolEraser = document.querySelector('#tool-eraser');
+  const toolPen = document.querySelector('#tool-pen');
+  const toolPaintBucket = document.querySelector('#tool-paint-bucket');
   if (toolStroke.classList[1] === 'tools-conteiner__item_button-active') {
     const startX = event.offsetX;
     const startY = event.offsetY;
@@ -235,6 +239,18 @@ canvas.addEventListener('mousedown', (event) => {
     const startX = event.offsetX;
     const startY = event.offsetY;
     const stroke = new Eraser(canvasData32, canvasData64, canvasData128, startX, startY);
+    stroke.start();
+  }
+  if (toolPen.classList[1] === 'tools-conteiner__item_button-active') {
+    const startX = event.offsetX;
+    const startY = event.offsetY;
+    const stroke = new Pen(canvasData32, canvasData64, canvasData128, startX, startY, event.which);
+    stroke.start();
+  }
+  if (toolPaintBucket.classList[1] === 'tools-conteiner__item_button-active') {
+    const startX = event.offsetX;
+    const startY = event.offsetY;
+    const stroke = new PaintBucket(canvasData32, canvasData64, canvasData128, startX, startY);
     stroke.start();
   }
 });

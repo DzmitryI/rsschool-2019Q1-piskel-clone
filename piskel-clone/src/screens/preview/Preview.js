@@ -57,6 +57,8 @@ export default class Preview {
 
   buttonAddFrameClick() {
     const frameList = new FrameList();
+    const containerFrame = document.querySelector('.frame-container');
+    [].map.call(containerFrame.children, item => item.classList.remove('container-current-frame-activ'));
     frameList.render();
     this.renameSizeFPS();
   }

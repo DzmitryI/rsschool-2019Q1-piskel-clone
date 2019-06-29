@@ -11,7 +11,7 @@ export default class FrameList {
   render() {
     const containerFrame = document.querySelector('.frame-container');
     const containerCurrentFrame = document.createElement('div');
-    containerCurrentFrame.className = 'container-current-frame draggable';
+    containerCurrentFrame.className = 'container-current-frame draggable container-current-frame-activ';
     const canvasFr = document.createElement('canvas');
     const buttonCanvasFrameDel = document.createElement('button');
     buttonCanvasFrameDel.className = 'button-frame button-del-frame';

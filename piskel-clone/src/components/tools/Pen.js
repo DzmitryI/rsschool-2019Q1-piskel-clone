@@ -1,5 +1,5 @@
 export default class Eraser {
-  constructor(canvasData32, canvasData64, canvasData128, startX, startY) {
+  constructor(canvasData32, canvasData64, canvasData128, startX, startY, which) {
     this.form = document;
     this.canvasData32 = canvasData32;
     this.canvasData64 = canvasData64;
@@ -8,6 +8,7 @@ export default class Eraser {
     this.currentResizeCanvas = 0;
     this.startX = startX;
     this.startY = startY;
+    this.which = which;
   }
 
   start() {
@@ -29,7 +30,6 @@ export default class Eraser {
     } else if (currenPenSize === 'pen-size-item4px') {
       this.sizePen = canvas.width / this.currentResizeCanvas * 3;
     } else this.sizePen = 0;
-
     canvas.onmousemove = this.onmousemove.bind(this);
     canvas.onmouseup = () => { canvas.onmousemove = null; };
     canvas.onmouseout = () => {
@@ -51,7 +51,9 @@ export default class Eraser {
         // eslint-disable-next-line max-len
         ctx.drawImage(canvas, 0, 0, canvas.width, canvas.height, 0, 0, curElem.width, curElem.height);
       }
+      canvas.onmousemove = null;
     };
+    // const ctx = canvas.getContext('2d');
     let canvasData = [];
     if (this.currentResizeCanvas === 32) canvasData = this.canvasData32;
     else if (this.currentResizeCanvas === 64) canvasData = this.canvasData64;
@@ -75,13 +77,20 @@ export default class Eraser {
   }
 
   currentPixel(canvas, canvasData, startX, startY) {
+    const primaryColor = this.form.querySelector('.color-conteiner__primary_item').value;
+    const secondaryColor = this.form.querySelector('.color-conteiner__secondary_item').value;
+    const { sizePen } = this;
     const ctx = canvas.getContext('2d');
+    if (this.which === 1) ctx.fillStyle = primaryColor;
+    else if (this.which === 3) ctx.fillStyle = secondaryColor;
     for (let i = 0; i < canvasData.length; i += 1) {
       const xi = canvasData[i][0] + canvasData[i][2];
       const yi = canvasData[i][1] + canvasData[i][3];
       if ((startX <= xi) && (startY <= yi)) {
         // eslint-disable-next-line max-len
-        ctx.clearRect(canvasData[i][0] - this.sizePen - 1, canvasData[i][1] - this.sizePen - 1, canvasData[i][2] + this.sizePen + 1, canvasData[i][3] + this.sizePen + 1);
+        ctx.clearRect(canvasData[i][0] - sizePen, canvasData[i][1] - sizePen, canvasData[i][2] + sizePen, canvasData[i][3] + sizePen);
+        // eslint-disable-next-line max-len
+        ctx.fillRect(canvasData[i][0] - sizePen, canvasData[i][1] - sizePen, canvasData[i][2] + sizePen + 1, canvasData[i][3] + sizePen + 1);
         break;
       }
     }
