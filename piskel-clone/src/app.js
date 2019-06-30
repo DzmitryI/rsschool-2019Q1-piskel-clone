@@ -25,6 +25,7 @@ const toolsConteiner = document.querySelector('.tools-conteiner');
 const settingsConteiner = document.querySelector('.settings-conteiner__list');
 const canvas = document.querySelector('.canvas-conteiner__canvas');
 const swapColors = document.querySelector('#swap-colors');
+const buttonAddFrame = document.getElementById('addFrame');
 
 const state = {
   correntTool: '',
@@ -339,4 +340,13 @@ canvas.addEventListener('mousedown', (event) => {
     const stroke = new PaintBucket(canvasData32, canvasData64, canvasData128, startX, startY);
     stroke.start();
   }
+});
+
+buttonAddFrame.addEventListener('mouseup', () => {
+  // const frameList = new FrameList();
+  const containerFrame = document.querySelector('.frame-container');
+  // eslint-disable-next-line max-len
+  [].map.call(containerFrame.children, item => item.classList.remove('container-current-frame-activ'));
+  frameList.render();
+  preview.renameSizeFPS();
 });

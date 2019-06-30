@@ -1,5 +1,4 @@
 import './style.scss';
-import FrameList from '../../components/frame-list/FrameList';
 
 import backgroundCanvasImg from '../../assets/images/canvas-backgrounds/canvas-background-light.png';
 
@@ -33,10 +32,8 @@ export default class Preview {
   init() {
     const previewButton = this.form.querySelector('.preview-button');
     const sizeFPS = this.form.getElementById('sizeFPS');
-    const buttonAddFrame = document.getElementById('addFrame');
     previewButton.addEventListener('click', this.previewButtonClick.bind(this));
     sizeFPS.addEventListener('mouseup', this.renameSizeFPS.bind(this));
-    buttonAddFrame.addEventListener('mouseup', this.buttonAddFrameClick.bind(this));
     const previewCanvas = document.querySelector('.preview-canvas');
     previewCanvas.style.backgroundImage = `url(${backgroundCanvasImg})`;
   }
@@ -53,13 +50,5 @@ export default class Preview {
 
   previewButtonClick() {
     this.form.querySelector('.preview-canvas').requestFullscreen();
-  }
-
-  buttonAddFrameClick() {
-    const frameList = new FrameList();
-    const containerFrame = document.querySelector('.frame-container');
-    [].map.call(containerFrame.children, item => item.classList.remove('container-current-frame-activ'));
-    frameList.render();
-    this.renameSizeFPS();
   }
 }

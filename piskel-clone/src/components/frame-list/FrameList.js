@@ -18,6 +18,7 @@ export default class FrameList {
     buttonCanvasFrameDel.style.cursor = 'pointer';
     const buttonCloneFrame = document.createElement('button');
     buttonCloneFrame.className = 'button-frame button-clone-frame';
+    buttonCloneFrame.style.cursor = 'pointer';
     const buttonCurrentNumber = document.createElement('input');
     buttonCurrentNumber.className = 'button-frame button-current-number-frame';
     buttonCurrentNumber.value = document.querySelectorAll('.button-current-number-frame').length + 1;
@@ -30,10 +31,13 @@ export default class FrameList {
     canvasFr.style.backgroundImage = `url(${backgroundCanvasImg})`;
 
     const canvas = this.form.querySelector('.canvas-conteiner__canvas');
+    const ctxMain = canvas.getContext('2d');
+    ctxMain.clearRect(0, 0, canvas.width, canvas.height);
     const addButton = this.form.querySelector('.frame-add-button');
     const ctx = canvasFr.getContext('2d');
     ctx.clearRect(0, 0, canvasFr.width, canvasFr.height);
-    ctx.drawImage(canvas, 0, 0, canvas.width, canvas.height, 0, 0, canvasFr.width, canvasFr.height);
+    // eslint-disable-next-line max-len
+    // ctx.drawImage(canvas, 0, 0, canvas.width, canvas.height, 0, 0, canvasFr.width, canvasFr.height);
     containerCurrentFrame.appendChild(buttonCanvasFrameDel);
     containerCurrentFrame.appendChild(buttonCloneFrame);
     containerCurrentFrame.appendChild(buttonCurrentNumber);
