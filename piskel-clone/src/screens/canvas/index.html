@@ -11,49 +11,50 @@
   </header>
   <main class="main">
     <div class="control-conteiner conteiner">
-      <div id="pen-size" class="pen-size-conteiner conteiner">
-        <div class="pen-size-item pen-size-item1px"></div>
-        <div class="pen-size-item pen-size-item2px"></div>
-        <div class="pen-size-item pen-size-item3px"></div>
-        <div class="pen-size-item pen-size-item4px"></div>
-      </div>
-      <div class="tools-conteiner conteiner">
-        <ul class="tools-conteiner__list palette-list">
-          <li class="tools-conteiner__item">
-            <button id="tool-pen" class="tools-conteiner__item_button">
-              <img id="tool-pen-img" alt="tool pen" />
-            </button>
-          </li>
-          <li class="tools-conteiner__item">
-            <button id="tool-paint-bucket" class="tools-conteiner__item_button">
-              <img id="tool-paint-bucket-img" alt="tool paint bucket" />
-            </button>
-          </li>
-          <li class="tools-conteiner__item">
-            <button id="tool-eraser" class="tools-conteiner__item_button">
-              <img id="tool-eraser-img" alt="tool eraser" />
-            </button>
-          </li>
-          <li class="tools-conteiner__item">
-            <button id="tool-stroke" class="tools-conteiner__item_button">
-              <img id="tool-stroke-img" alt="tool stroke" />
-            </button>
-          </li>
-        </ul>
-      </div>
-      <div class="color-conteiner conteiner">
-        <div class="color-conteiner__primary">
-          <input type="color" class="color-conteiner__primary_item">
-        </div>
-        <div class="color-conteiner__secondary">
-          <input type="color" class="color-conteiner__secondary_item">
-        </div>
-        <div class="color-conteiner__swap-colors">
-          <button id="" class="color-conteiner__swap-colors_button">
-            <img id="swap-colors" alt="swap colors" />
+      <div id="pen-size" class="pen-size-conteiner conteiner" data-tipSize="From size &#13;&#10from 1 to 4 pixels">
+      </div>>
+      <div class="pen-size-item pen-size-item1px"></div>
+      <div class="pen-size-item pen-size-item2px"></div>
+      <div class="pen-size-item pen-size-item3px"></div>
+      <div class="pen-size-item pen-size-item4px"></div>
+    </div>
+    <div class="tools-conteiner conteiner">
+      <ul class="tools-conteiner__list palette-list">
+        <li class="tools-conteiner__item">
+          <button id="tool-pen" class="tools-conteiner__item_button">
+            <img id="tool-pen-img" alt="tool pen" />
           </button>
-        </div>
+        </li>
+        <li class="tools-conteiner__item">
+          <button id="tool-paint-bucket" class="tools-conteiner__item_button">
+            <img id="tool-paint-bucket-img" alt="tool paint bucket" />
+          </button>
+        </li>
+        <li class="tools-conteiner__item">
+          <button id="tool-eraser" class="tools-conteiner__item_button">
+            <img id="tool-eraser-img" alt="tool eraser" />
+          </button>
+        </li>
+        <li class="tools-conteiner__item">
+          <button id="tool-stroke" class="tools-conteiner__item_button">
+            <img id="tool-stroke-img" alt="tool stroke" />
+          </button>
+        </li>
+      </ul>
+    </div>
+    <div class="color-conteiner conteiner">
+      <div class="color-conteiner__primary">
+        <input type="color" class="color-conteiner__primary_item">
       </div>
+      <div class="color-conteiner__secondary">
+        <input type="color" class="color-conteiner__secondary_item">
+      </div>
+      <div class="color-conteiner__swap-colors">
+        <button id="" class="color-conteiner__swap-colors_button">
+          <img id="swap-colors" alt="swap colors" />
+        </button>
+      </div>
+    </div>
     </div>
     <div class="frame-container conteiner">
       <button id="addFrame" class="frame-add-button">
@@ -113,22 +114,23 @@
     </div>
     <div class="settings-conteiner conteiner">
       <ul class="settings-conteiner__list palette-list">
-        <li class="settings-conteiner__item">
+        <li class="settings-conteiner__item setting-resize" data-tip="RESIZE &#13;&#10Resize the drawing area">
           <button id="setting-resize" class="settings-conteiner__item_button">
             <img id="setting-resize-img" alt="tool resize" />
           </button>
         </li>
-        <li class="settings-conteiner__item">
+        <li class="settings-conteiner__item" data-tip="SAVE &#13;&#10Save to your gallery">
           <button id="setting-save" class="settings-conteiner__item_button">
             <img id="setting-save-img" alt="tool save" />
           </button>
         </li>
-        <li class="settings-conteiner__item">
+        <li class="settings-conteiner__item" data-tip="EXPORT &#13;&#10Export as Image &#13;&#10as Animated GIF">
           <button id="setting-export" class="settings-conteiner__item_button">
             <img id="setting-export-img" alt="tool export" />
           </button>
         </li>
-        <li class="settings-conteiner__item">
+        <li class="settings-conteiner__item"
+          data-tip="IMPORT &#13;&#10Import an existing image &#13;&#10a .piskel file">
           <button id="setting-import" type="file" class="settings-conteiner__item_button">
             <img id="setting-import-img" alt="tool import" />
           </button>

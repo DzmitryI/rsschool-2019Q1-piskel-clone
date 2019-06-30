@@ -1,4 +1,5 @@
 import './index.scss';
+import './settings.scss';
 import penIcon from '../../assets/images/icons/tools/tool-pen.png';
 import paintBacketIcon from '../../assets/images/icons/tools/tool-paint-bucket.png';
 import eraserIcon from '../../assets/images/icons/tools/tool-eraser.png';
