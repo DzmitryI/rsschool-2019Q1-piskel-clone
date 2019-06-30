@@ -15,6 +15,7 @@ export default class FrameList {
     const canvasFr = document.createElement('canvas');
     const buttonCanvasFrameDel = document.createElement('button');
     buttonCanvasFrameDel.className = 'button-frame button-del-frame';
+    buttonCanvasFrameDel.style.cursor = 'pointer';
     const buttonCloneFrame = document.createElement('button');
     buttonCloneFrame.className = 'button-frame button-clone-frame';
     const buttonCurrentNumber = document.createElement('input');

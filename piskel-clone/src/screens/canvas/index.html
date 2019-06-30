@@ -54,6 +54,9 @@
           </button>
         </div>
       </div>
+      <div class="cheatsheet-link" data-otherTips="Keyboard shortcuts">
+        <img id="cheatsheet-link-img" alt="cheatsheet link" />
+      </div>
     </div>
     <div class="frame-container conteiner">
       <button id="addFrame" class="frame-add-button">
@@ -137,6 +140,41 @@
       </ul>
     </div>
   </main>
+  <div class="modal-overlay" id="modal-overlay"></div>
+  <div class="modal" id="modal">
+    <h2 class="model-title">Keyboard shortcuts</h2>
+    <div class="modal-guts">
+      <div class="modal-tip-conteiner__img">
+        <ul class="modal-tip-conteiner__img__list">
+          <li class="modal-tip-conteiner__img__list__item"><img id="tip-tool-pen-img" alt="tool pen" /></li>
+          <li class="modal-tip-conteiner__img__list__item"><img id="tip-tool-paint-bucket-img"
+              alt="tool paint bucket" /></li>
+          <li class="modal-tip-conteiner__img__list__item"><img id="tip-tool-eraser-img" alt="tool eraser" /></li>
+          <li class="modal-tip-conteiner__img__list__item"><img id="tip-tool-stroke-img" alt="tool stroke" /></li>
+          <li class="modal-tip-conteiner__img__list__item"><img id="tip-swap-colors-img" alt="swap colops" /></li>
+        </ul>
+      </div>
+      <div class="modal-tip-conteiner__descrip">
+        <ul class="modal-tip-conteiner__descrip__list">
+          <li class="modal-tip-conteiner__descrip__list_item">
+            Pen tool (P)
+          </li>
+          <li class="modal-tip-conteiner__descrip__list_item">
+            Paint Bucket tool (B)
+          </li>
+          <li class="modal-tip-conteiner__descrip__list_item">
+            Eraser tool (E)
+          </li>
+          <li class="modal-tip-conteiner__descrip__list_item">
+            Stroke tool (S)
+          </li>
+          <li class="modal-tip-conteiner__descrip__list_item">
+            Swap colors (X)
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
   <script src="./index.js"></script>
 </body>
 

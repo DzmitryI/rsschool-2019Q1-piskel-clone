@@ -13,6 +13,8 @@ import framePlusIcon from '../../assets/images/icons/frame/frame-plus.png';
 
 import swapColrsIcon from '../../assets/images/icons/tools/swap_color.png';
 
+import cheatsheetLinkIcon from '../../assets/images/icons/common/common-keyboard.png';
+
 import settingResizeIcon from '../../assets/images/icons/settings/settings-resize.png';
 import settingSeveIcon from '../../assets/images/icons/settings/settings-save.png';
 import settingExportIcon from '../../assets/images/icons/settings/settings-export.png';
@@ -59,6 +61,9 @@ export default class Index {
 
     const swapColors = this.form.getElementById('swap-colors');
     swapColors.src = swapColrsIcon;
+
+    const cheatsheetLink = this.form.getElementById('cheatsheet-link-img');
+    cheatsheetLink.src = cheatsheetLinkIcon;
 
     const canvas = this.form.querySelector('.canvas-conteiner__canvas');
     const ctx = canvas.getContext('2d');
