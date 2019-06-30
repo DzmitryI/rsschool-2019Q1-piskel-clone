@@ -23,8 +23,6 @@ const toolsConteiner = document.querySelector('.tools-conteiner');
 const settingsConteiner = document.querySelector('.settings-conteiner__list');
 const canvas = document.querySelector('.canvas-conteiner__canvas');
 const swapColors = document.querySelector('#swap-colors');
-// const buttonAddFrame = document.getElementById('addFrame');
-// const sizeFPS = document.getElementById('sizeFPS');
 
 const state = {
   correntTool: '',
@@ -155,6 +153,76 @@ toolsConteiner.addEventListener('click', (event) => {
       event.target.parentNode.classList.add('tools-conteiner__item_button-active');
       canvas.style.cursor = `url(${strokeCursorIcon}), auto`;
     }
+  }
+});
+
+document.addEventListener('keypress', (event) => {
+  const arrSize = toolsConteiner.children[0].children;
+  switch (event.key) {
+    case 'p':
+      if (state.correntTool === 'toolPen') {
+        arrSize[0].children[0].classList.remove('tools-conteiner__item_button-active');
+        state.correntTool = '';
+        canvas.style.cursor = 'default';
+      } else {
+        for (let i = 0; i < arrSize.length; i += 1) {
+          arrSize[i].children[0].classList.remove('tools-conteiner__item_button-active');
+        }
+        state.correntTool = 'toolPen';
+        arrSize[0].children[0].classList.add('tools-conteiner__item_button-active');
+        canvas.style.cursor = `url(${penCursorIcon}), auto`;
+      }
+      break;
+    case 'b':
+      if (state.correntTool === 'toolPaintBucket') {
+        arrSize[1].children[0].classList.remove('tools-conteiner__item_button-active');
+        state.correntTool = '';
+        canvas.style.cursor = 'default';
+      } else {
+        for (let i = 0; i < arrSize.length; i += 1) {
+          arrSize[i].children[0].classList.remove('tools-conteiner__item_button-active');
+        }
+        state.correntTool = 'toolPaintBucket';
+        arrSize[1].children[0].classList.add('tools-conteiner__item_button-active');
+        canvas.style.cursor = `url(${paintBucketCursorIcon}), auto`;
+      }
+      break;
+    case 'e':
+      if (state.correntTool === 'toolEraser') {
+        arrSize[2].children[0].classList.remove('tools-conteiner__item_button-active');
+        state.correntTool = '';
+        canvas.style.cursor = 'default';
+      } else {
+        for (let i = 0; i < arrSize.length; i += 1) {
+          arrSize[i].children[0].classList.remove('tools-conteiner__item_button-active');
+        }
+        state.correntTool = 'toolEraser';
+        arrSize[2].children[0].classList.add('tools-conteiner__item_button-active');
+        canvas.style.cursor = `url(${eraserCursorIcon}), auto`;
+      }
+      break;
+    case 's':
+      if (state.correntTool === 'toolStroke') {
+        arrSize[3].children[0].classList.remove('tools-conteiner__item_button-active');
+        state.correntTool = '';
+        canvas.style.cursor = 'default';
+      } else {
+        for (let i = 0; i < arrSize.length; i += 1) {
+          arrSize[i].children[0].classList.remove('tools-conteiner__item_button-active');
+        }
+        state.correntTool = 'toolStroke';
+        arrSize[3].children[0].classList.add('tools-conteiner__item_button-active');
+        canvas.style.cursor = `url(${strokeCursorIcon}), auto`;
+      }
+      break;
+    case 'x': {
+      const primaryColor = document.querySelector('.color-conteiner__primary_item').value;
+      document.querySelector('.color-conteiner__primary_item').value = document.querySelector('.color-conteiner__secondary_item').value;
+      document.querySelector('.color-conteiner__secondary_item').value = primaryColor;
+      break;
+    }
+    default:
+      break;
   }
 });
 
