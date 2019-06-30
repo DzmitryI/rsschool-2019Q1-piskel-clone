@@ -11,50 +11,49 @@
   </header>
   <main class="main">
     <div class="control-conteiner conteiner">
-      <div id="pen-size" class="pen-size-conteiner conteiner" data-tipSize="From size &#13;&#10from 1 to 4 pixels">
-      </div>>
-      <div class="pen-size-item pen-size-item1px"></div>
-      <div class="pen-size-item pen-size-item2px"></div>
-      <div class="pen-size-item pen-size-item3px"></div>
-      <div class="pen-size-item pen-size-item4px"></div>
-    </div>
-    <div class="tools-conteiner conteiner">
-      <ul class="tools-conteiner__list palette-list">
-        <li class="tools-conteiner__item">
-          <button id="tool-pen" class="tools-conteiner__item_button">
-            <img id="tool-pen-img" alt="tool pen" />
-          </button>
-        </li>
-        <li class="tools-conteiner__item">
-          <button id="tool-paint-bucket" class="tools-conteiner__item_button">
-            <img id="tool-paint-bucket-img" alt="tool paint bucket" />
-          </button>
-        </li>
-        <li class="tools-conteiner__item">
-          <button id="tool-eraser" class="tools-conteiner__item_button">
-            <img id="tool-eraser-img" alt="tool eraser" />
-          </button>
-        </li>
-        <li class="tools-conteiner__item">
-          <button id="tool-stroke" class="tools-conteiner__item_button">
-            <img id="tool-stroke-img" alt="tool stroke" />
-          </button>
-        </li>
-      </ul>
-    </div>
-    <div class="color-conteiner conteiner">
-      <div class="color-conteiner__primary">
-        <input type="color" class="color-conteiner__primary_item">
+      <div id="pen-size" class="pen-size-conteiner conteiner" data-otherTips="From size &#13;&#10from 1 to 4 pixels">
+        <div class="pen-size-item pen-size-item1px"></div>
+        <div class="pen-size-item pen-size-item2px"></div>
+        <div class="pen-size-item pen-size-item3px"></div>
+        <div class="pen-size-item pen-size-item4px"></div>
       </div>
-      <div class="color-conteiner__secondary">
-        <input type="color" class="color-conteiner__secondary_item">
+      <div class="tools-conteiner conteiner">
+        <ul class="tools-conteiner__list palette-list">
+          <li class="tools-conteiner__item" data-otherTips="Pen tool &#13;&#10(P)">
+            <button id="tool-pen" class="tools-conteiner__item_button">
+              <img id="tool-pen-img" alt="tool pen" />
+            </button>
+          </li>
+          <li class="tools-conteiner__item" data-otherTips="Paint Bucket tool &#13;&#10(B)">
+            <button id="tool-paint-bucket" class="tools-conteiner__item_button">
+              <img id="tool-paint-bucket-img" alt="tool paint bucket" />
+            </button>
+          </li>
+          <li class="tools-conteiner__item" data-otherTips="Eraser tool &#13;&#10(E)">
+            <button id="tool-eraser" class="tools-conteiner__item_button">
+              <img id="tool-eraser-img" alt="tool eraser" />
+            </button>
+          </li>
+          <li class="tools-conteiner__item" data-otherTips="Stroke tool &#13;&#10(S)">
+            <button id="tool-stroke" class="tools-conteiner__item_button">
+              <img id="tool-stroke-img" alt="tool stroke" />
+            </button>
+          </li>
+        </ul>
       </div>
-      <div class="color-conteiner__swap-colors">
-        <button id="" class="color-conteiner__swap-colors_button">
-          <img id="swap-colors" alt="swap colors" />
-        </button>
+      <div class="color-conteiner conteiner">
+        <div class="color-conteiner__primary">
+          <input type="color" class="color-conteiner__primary_item">
+        </div>
+        <div class="color-conteiner__secondary">
+          <input type="color" class="color-conteiner__secondary_item">
+        </div>
+        <div class="color-conteiner__swap-colors" data-otherTips="Swap colors &#13;&#10(X)">
+          <button id="" class="color-conteiner__swap-colors_button">
+            <img id="swap-colors" alt="swap colors" />
+          </button>
+        </div>
       </div>
-    </div>
     </div>
     <div class="frame-container conteiner">
       <button id="addFrame" class="frame-add-button">
