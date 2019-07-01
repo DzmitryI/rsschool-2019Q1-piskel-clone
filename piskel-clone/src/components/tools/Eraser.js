@@ -56,8 +56,8 @@ export default class Eraser {
     if (this.currentResizeCanvas === 32) canvasData = this.canvasData32;
     else if (this.currentResizeCanvas === 64) canvasData = this.canvasData64;
     else if (this.currentResizeCanvas === 128) canvasData = this.canvasData128;
-    const x = this.startX;
-    const y = this.startY;
+    const x = this.startX + 5;
+    const y = this.startY + 10;
     this.currentPixel(canvas, canvasData, x, y);
   }
 
@@ -69,8 +69,8 @@ export default class Eraser {
     if (currentResize === 32) canvasData = this.canvasData32;
     else if (currentResize === 64) canvasData = this.canvasData64;
     else if (currentResize === 128) canvasData = this.canvasData128;
-    const x = event.offsetX;
-    const y = event.offsetY;
+    const x = event.offsetX + 5;
+    const y = event.offsetY + 10;
     this.currentPixel(canvas, canvasData, x, y);
   }
 

@@ -58,21 +58,19 @@ export default class Eraser {
     if (this.currentResizeCanvas === 32) canvasData = this.canvasData32;
     else if (this.currentResizeCanvas === 64) canvasData = this.canvasData64;
     else if (this.currentResizeCanvas === 128) canvasData = this.canvasData128;
-    const x = this.startX;
-    const y = this.startY;
+    const x = this.startX + 5;
+    const y = this.startY + 10;
     this.currentPixel(canvas, canvasData, x, y);
   }
 
   onmousemove(event) {
     const canvas = event.target.parentNode.children[0];
-    const resizeArr = this.form.getElementsByName('resize');
-    const currentResize = +[].filter.call(resizeArr, item => item.checked)[0].value;
     let canvasData = [];
-    if (currentResize === 32) canvasData = this.canvasData32;
-    else if (currentResize === 64) canvasData = this.canvasData64;
-    else if (currentResize === 128) canvasData = this.canvasData128;
-    const x = event.offsetX;
-    const y = event.offsetY;
+    if (this.currentResizeCanvas === 32) canvasData = this.canvasData32;
+    else if (this.currentResizeCanvas === 64) canvasData = this.canvasData64;
+    else if (this.currentResizeCanvas === 128) canvasData = this.canvasData128;
+    const x = event.offsetX + 5;
+    const y = event.offsetY + 10;
     this.currentPixel(canvas, canvasData, x, y);
   }
 

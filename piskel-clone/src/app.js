@@ -35,14 +35,14 @@ const state = {
 
 const app = new Index();
 app.start();
-const { canvasData32 } = app;
-const { canvasData64 } = app;
-const { canvasData128 } = app;
+const { canvData32 } = app;
+const { canvData64 } = app;
+const { canvData128 } = app;
 
 const resize = new Resize();
 resize.init();
 
-const mouseCoordinatesMove = new MouseCoordinatesMove(canvasData32, canvasData64, canvasData128);
+const mouseCoordinatesMove = new MouseCoordinatesMove(canvData32, canvData64, canvData128);
 mouseCoordinatesMove.init();
 
 const modelCheatsheer = new ModelCheatsheer();
@@ -316,28 +316,23 @@ canvas.addEventListener('mousedown', (event) => {
   const toolEraser = document.querySelector('#tool-eraser');
   const toolPen = document.querySelector('#tool-pen');
   const toolPaintBucket = document.querySelector('#tool-paint-bucket');
+  const startX = event.offsetX;
+  const startY = event.offsetY;
+  const { which } = event;
   if (toolStroke.classList[1] === 'tools-conteiner__item_button-active') {
-    const startX = event.offsetX;
-    const startY = event.offsetY;
-    const stroke = new Stroke(canvasData32, canvasData64, canvasData128, startX, startY);
+    const stroke = new Stroke(canvData32, canvData64, canvData128, startX, startY);
     stroke.start();
   }
   if (toolEraser.classList[1] === 'tools-conteiner__item_button-active') {
-    const startX = event.offsetX;
-    const startY = event.offsetY;
-    const stroke = new Eraser(canvasData32, canvasData64, canvasData128, startX, startY);
+    const stroke = new Eraser(canvData32, canvData64, canvData128, startX, startY);
     stroke.start();
   }
   if (toolPen.classList[1] === 'tools-conteiner__item_button-active') {
-    const startX = event.offsetX;
-    const startY = event.offsetY;
-    const stroke = new Pen(canvasData32, canvasData64, canvasData128, startX, startY, event.which);
+    const stroke = new Pen(canvData32, canvData64, canvData128, startX, startY, which);
     stroke.start();
   }
   if (toolPaintBucket.classList[1] === 'tools-conteiner__item_button-active') {
-    const startX = event.offsetX;
-    const startY = event.offsetY;
-    const stroke = new PaintBucket(canvasData32, canvasData64, canvasData128, startX, startY);
+    const stroke = new PaintBucket(canvData32, canvData64, canvData128, startX, startY);
     stroke.start();
   }
 });

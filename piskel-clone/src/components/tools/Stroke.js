@@ -37,8 +37,8 @@ export default class Stroke {
   }
 
   onmouseopStroke(event) {
-    const curX = event.offsetX;
-    const curY = event.offsetY;
+    const curX = event.offsetX + 5;
+    const curY = event.offsetY + 10;
 
     const pixel = (x, y) => {
       const primaryColor = this.form.querySelector('.color-conteiner__primary_item').value;

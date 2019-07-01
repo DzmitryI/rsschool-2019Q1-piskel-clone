@@ -11,8 +11,6 @@ export default class ModelCheatsheer {
   }
 
   init() {
-    // const penSize = this.form.querySelector('.pen-size-item1px');
-    // penSize.classList.add('tools-conteiner__item_button-active');
     const pen = this.form.getElementById('tip-tool-pen-img');
     pen.src = penIcon;
     const paintBacket = this.form.getElementById('tip-tool-paint-bucket-img');
@@ -37,7 +35,6 @@ export default class ModelCheatsheer {
     const modalOverlay = this.form.querySelector('#modal-overlay');
     modal.classList.toggle('closed');
     modalOverlay.classList.toggle('closed');
-    // const closeButton = this.form.querySelector('#close-button');
     modal.addEventListener('click', this.closeButtonClick.bind(this));
   }
 

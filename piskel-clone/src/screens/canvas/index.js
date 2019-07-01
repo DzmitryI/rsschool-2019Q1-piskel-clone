@@ -23,9 +23,9 @@ import settingImportIcon from '../../assets/images/icons/settings/settings-open-
 export default class Index {
   constructor() {
     this.form = document;
-    this.canvasData32 = [];
-    this.canvasData64 = [];
-    this.canvasData128 = [];
+    this.canvData32 = [];
+    this.canvData64 = [];
+    this.canvData128 = [];
     this.sizePen = 0;
     this.currentResizeCanvas = 0;
     this.startX = 0;
@@ -67,7 +67,7 @@ export default class Index {
 
     const canvas = this.form.querySelector('.canvas-conteiner__canvas');
     const ctx = canvas.getContext('2d');
-    ctx.fillStyle = 'rgba(100,150,185,0.1)';
+    ctx.fillStyle = 'rgba(255,255,255,0.1)';
     const x32 = canvas.width / 32;
     const x64 = canvas.width / 64;
     const x128 = canvas.width / 128;
@@ -90,8 +90,8 @@ export default class Index {
       }
     }
     ctx.fillRect(0, 0, 400, 400);
-    this.canvasData32 = canvasData32;
-    this.canvasData64 = canvasData64;
-    this.canvasData128 = canvasData128;
+    this.canvData32 = canvasData32;
+    this.canvData64 = canvasData64;
+    this.canvData128 = canvasData128;
   }
 }
