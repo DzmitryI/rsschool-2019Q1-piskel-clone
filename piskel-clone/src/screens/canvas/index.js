@@ -67,7 +67,7 @@ export default class Index {
 
     const canvas = this.form.querySelector('.canvas-conteiner__canvas');
     const ctx = canvas.getContext('2d');
-    ctx.fillStyle = 'rgba(0,0,0,0)';
+    // ctx.fillStyle = 'rgba(0,0,0,0)';
     const x32 = canvas.width / 32;
     const x64 = canvas.width / 64;
     const x128 = canvas.width / 128;
@@ -89,7 +89,7 @@ export default class Index {
         canvasData128.push([j * x128, i * x128, x128, x128, j, i]);
       }
     }
-    ctx.fillRect(0, 0, 400, 400);
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
     this.canvData32 = canvasData32;
     this.canvData64 = canvasData64;
     this.canvData128 = canvasData128;

@@ -362,7 +362,6 @@ canvas.addEventListener('mousedown', (event) => {
 });
 
 buttonAddFrame.addEventListener('mouseup', () => {
-  // const frameList = new FrameList();
   const containerFrame = document.querySelector('.frame-container');
   // eslint-disable-next-line max-len
   [].map.call(containerFrame.children, item => item.classList.remove('container-current-frame-activ'));

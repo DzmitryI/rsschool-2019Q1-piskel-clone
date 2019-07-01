@@ -37,7 +37,6 @@ export default class FrameList {
     const ctx = canvasFr.getContext('2d');
     ctx.clearRect(0, 0, canvasFr.width, canvasFr.height);
     // eslint-disable-next-line max-len
-    // ctx.drawImage(canvas, 0, 0, canvas.width, canvas.height, 0, 0, canvasFr.width, canvasFr.height);
     containerCurrentFrame.appendChild(buttonCanvasFrameDel);
     containerCurrentFrame.appendChild(buttonCloneFrame);
     containerCurrentFrame.appendChild(buttonCurrentNumber);

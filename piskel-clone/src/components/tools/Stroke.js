@@ -13,10 +13,6 @@ export default class Stroke {
   start() {
     const canvas = this.form.querySelector('.canvas-conteiner__canvas');
     canvas.onmouseup = this.onmouseopStroke.bind(this);
-    // canvas.onmousemove = this.onmousemoveStroke.bind(this);
-    // canvas.onmouseup = () => {
-    // canvas.onmousemove = null;
-    // };
     const resizeArr = this.form.getElementsByName('resize');
     this.currentResizeCanvas = +[].filter.call(resizeArr, item => item.checked)[0].value;
     const penSize = document.querySelector('#pen-size').children;
@@ -73,28 +69,20 @@ export default class Stroke {
       let xe;
       let ye;
       let i;
-      // Calculate line deltas
       const dx = x2 - x1;
       const dy = y2 - y1;
-      // Create a positive copy of deltas (makes iterating easier)
       const dx1 = Math.abs(dx);
       const dy1 = Math.abs(dy);
-      // Calculate error intervals for both axis
       px = 2 * dy1 - dx1;
       py = 2 * dx1 - dy1;
-      // The line is X-axis dominant
       if (dy1 <= dx1) {
-        // Line is drawn left to right
         if (dx >= 0) {
           x = x1; y = y1; xe = x2;
-        } else { // Line is drawn right to left (swap ends)
           x = x2; y = y2; xe = x1;
         }
         pixel(x, y); // Draw first pixel
-        // Rasterize the line
         for (i = 0; x < xe; i += 1) {
           x += 1;
-          // Deal with octants...
           if (px < 0) {
             px += 2 * dy1;
           } else {
@@ -105,21 +93,17 @@ export default class Stroke {
             }
             px += 2 * (dy1 - dx1);
           }
-          // Draw pixel from line span at currently rasterized position
           pixel(x, y);
         }
-      } else { // The line is Y-axis dominant
-        // Line is drawn bottom to top
+      } else {
         if (dy >= 0) {
           x = x1; y = y1; ye = y2;
-        } else { // Line is drawn top to bottom
+        } else {
           x = x2; y = y2; ye = y1;
         }
-        pixel(x, y); // Draw first pixel
-        // Rasterize the line
+        pixel(x, y);
         for (i = 0; y < ye; i += 1) {
           y += 1;
-          // Deal with octants...
           if (py <= 0) {
             py += 2 * dx1;
           } else {
@@ -130,11 +114,32 @@ export default class Stroke {
             }
             py += 2 * (dx1 - dy1);
           }
-          // Draw pixel from line span at currently rasterized position
           pixel(x, y);
         }
       }
     };
     drawLine(this.startX, this.startY, curX, curY);
+
+    const canvas = this.form.querySelector('.canvas-conteiner__canvas');
+    canvas.onmouseout = () => {
+      const frameConteiner = this.form.querySelector('.frame-container');
+      let res;
+      let curElem;
+      for (let i = 0; i < frameConteiner.children.length; i += 1) {
+        const element = frameConteiner.children[i];
+        res = [].indexOf.call(element.classList, 'container-current-frame-activ');
+        if (res !== -1) {
+          // eslint-disable-next-line prefer-destructuring
+          curElem = element.children[4];
+          break;
+        }
+      }
+      if (curElem) {
+        const ctx = curElem.getContext('2d');
+        ctx.clearRect(0, 0, curElem.width, curElem.height);
+        // eslint-disable-next-line max-len
+        ctx.drawImage(canvas, 0, 0, canvas.width, canvas.height, 0, 0, curElem.width, curElem.height);
+      }
+    };
   }
 }

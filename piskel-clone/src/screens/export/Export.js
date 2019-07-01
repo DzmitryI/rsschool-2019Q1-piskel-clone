@@ -18,7 +18,8 @@ export default class Export {
     const ctx = canvas.getContext('2d');
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     imgForCanvas.onload = () => {
-      ctx.drawImage(imgForCanvas, 0, 0, 400, 400, 0, 0, canvas.width, canvas.height);
+      // eslint-disable-next-line max-len
+      ctx.drawImage(imgForCanvas, 0, 0, canvas.width, canvas.height, 0, 0, canvas.width, canvas.height);
     };
   }
 }

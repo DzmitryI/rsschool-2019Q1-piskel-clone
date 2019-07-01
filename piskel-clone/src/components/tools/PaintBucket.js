@@ -1,4 +1,4 @@
-export default class Eraser {
+export default class PaintBucket {
   constructor(canvasData32, canvasData64, canvasData128, startX, startY) {
     this.form = document;
     this.canvasData32 = canvasData32;
@@ -65,7 +65,7 @@ export default class Eraser {
         reachLeft = false;
         reachRight = false;
 
-        while (y <= 400 && matchStartColor(pixelPos, startR, startG, startB, colorData)) {
+        while (y <= 600 && matchStartColor(pixelPos, startR, startG, startB, colorData)) {
           y += 1;
 
           colorPixel(pixelPos, primaryColor.r, primaryColor.g, primaryColor.b, colorData);
@@ -80,7 +80,7 @@ export default class Eraser {
               reachLeft = false;
             }
           }
-          if (x < 400) {
+          if (x < 600) {
             if (matchStartColor(pixelPos + 4, startR, startG, startB, outlineData)) {
               if (!reachRight) {
                 pixelStack.push([x + 1, y]);
@@ -110,5 +110,27 @@ export default class Eraser {
       floodFill(startX, startY, r, g, b, canvas.clientWidth, outlineLayerData, colorLayerData);
     }
     ctx.putImageData(colorLayerData, 0, 0);
+
+    canvas.onmouseout = () => {
+      const frameConteiner = this.form.querySelector('.frame-container');
+      let res;
+      let curElem;
+      for (let i = 0; i < frameConteiner.children.length; i += 1) {
+        const element = frameConteiner.children[i];
+        res = [].indexOf.call(element.classList, 'container-current-frame-activ');
+        if (res !== -1) {
+          // eslint-disable-next-line prefer-destructuring
+          curElem = element.children[4];
+          break;
+        }
+      }
+      if (curElem) {
+        const ctxFrame = curElem.getContext('2d');
+        ctxFrame.clearRect(0, 0, curElem.width, curElem.height);
+        // eslint-disable-next-line max-len
+        ctxFrame.drawImage(canvas, 0, 0, canvas.width, canvas.height, 0, 0, curElem.width, curElem.height);
+      }
+      canvas.onmousemove = null;
+    };
   }
 }
