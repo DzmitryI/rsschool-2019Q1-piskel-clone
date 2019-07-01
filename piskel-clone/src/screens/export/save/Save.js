@@ -8,6 +8,10 @@ export default class Save {
   init() {
     const saveButton = this.form.querySelector('.save-button');
     saveButton.addEventListener('mousedown', this.mouseDown.bind(this));
+    const piskelName = this.form.querySelector('.save-field');
+    const piskelNameHead = this.form.querySelector('.piskel-name');
+    piskelName.value = 'piskel-name';
+    piskelNameHead.innerHTML = piskelName.value;
   }
 
   mouseDown() {

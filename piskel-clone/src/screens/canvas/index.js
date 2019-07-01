@@ -67,7 +67,7 @@ export default class Index {
 
     const canvas = this.form.querySelector('.canvas-conteiner__canvas');
     const ctx = canvas.getContext('2d');
-    ctx.fillStyle = 'rgba(255,255,255,0.1)';
+    ctx.fillStyle = 'rgba(0,0,0,0)';
     const x32 = canvas.width / 32;
     const x64 = canvas.width / 64;
     const x128 = canvas.width / 128;

@@ -13,6 +13,12 @@ export default class Import {
   change(event) {
     const canvas = this.form.querySelector('.canvas-conteiner__canvas');
     const file = event.target.files;
+
+    const piskelNameHead = this.form.querySelector('.piskel-name');
+    piskelNameHead.innerHTML = file[0].name.slice(0, file[0].name.indexOf('.'));
+    const piskelName = this.form.querySelector('.save-field');
+    piskelName.value = file[0].name.slice(0, file[0].name.indexOf('.'));
+
     const imgForCanvas = new Image();
     imgForCanvas.src = window.URL.createObjectURL(file[0]);
     const ctx = canvas.getContext('2d');

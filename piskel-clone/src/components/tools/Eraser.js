@@ -81,7 +81,7 @@ export default class Eraser {
       const yi = canvasData[i][1] + canvasData[i][3];
       if ((startX <= xi) && (startY <= yi)) {
         // eslint-disable-next-line max-len
-        ctx.clearRect(canvasData[i][0] - this.sizePen - 1, canvasData[i][1] - this.sizePen - 1, canvasData[i][2] + this.sizePen + 1, canvasData[i][3] + this.sizePen + 1);
+        ctx.clearRect(canvasData[i][0] - this.sizePen - 1, canvasData[i][1] - this.sizePen - 1, canvasData[i][2] + this.sizePen + 2, canvasData[i][3] + this.sizePen + 2);
         break;
       }
     }

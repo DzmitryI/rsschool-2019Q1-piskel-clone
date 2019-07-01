@@ -63,7 +63,6 @@ frameList.render();
 const preview = new Preview();
 preview.init();
 
-
 penSizeConteiner.addEventListener('click', (event) => {
   const arrSize = event.target.parentNode.children;
   if (event.target.classList[1] === 'pen-size-item1px') {
@@ -322,18 +321,22 @@ canvas.addEventListener('mousedown', (event) => {
   if (toolStroke.classList[1] === 'tools-conteiner__item_button-active') {
     const stroke = new Stroke(canvData32, canvData64, canvData128, startX, startY);
     stroke.start();
+    preview.renameSizeFPS();
   }
   if (toolEraser.classList[1] === 'tools-conteiner__item_button-active') {
     const stroke = new Eraser(canvData32, canvData64, canvData128, startX, startY);
     stroke.start();
+    preview.renameSizeFPS();
   }
   if (toolPen.classList[1] === 'tools-conteiner__item_button-active') {
     const stroke = new Pen(canvData32, canvData64, canvData128, startX, startY, which);
     stroke.start();
+    preview.renameSizeFPS();
   }
   if (toolPaintBucket.classList[1] === 'tools-conteiner__item_button-active') {
     const stroke = new PaintBucket(canvData32, canvData64, canvData128, startX, startY);
     stroke.start();
+    preview.renameSizeFPS();
   }
 });
 
