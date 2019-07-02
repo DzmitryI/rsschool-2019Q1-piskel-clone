@@ -18,6 +18,7 @@ import paintBucketCursorIcon from './assets/images/cursors/paint-bucket.png';
 
 import MouseCoordinatesMove from './components/model-dialog/mouseCoordinatesMove';
 
+import LandingPage from './components/model-dialog/landing/Landing';
 import ModelCheatsheer from './components/model-dialog/modelCheatsheet/ModelCheatsheet';
 
 const penSizeConteiner = document.querySelector('.pen-size-conteiner');
@@ -44,6 +45,9 @@ resize.init();
 
 const mouseCoordinatesMove = new MouseCoordinatesMove(canvData32, canvData64, canvData128);
 mouseCoordinatesMove.init();
+
+const landingPage = new LandingPage();
+landingPage.init();
 
 const modelCheatsheer = new ModelCheatsheer();
 modelCheatsheer.init();
