@@ -10,11 +10,13 @@ import Pen from './components/tools/Pen';
 import Stroke from './components/tools/Stroke';
 import Eraser from './components/tools/Eraser';
 import PaintBucket from './components/tools/PaintBucket';
+import ColorPicker from './components/tools/ColorPicker';
 
 import eraserCursorIcon from './assets/images/cursors/eraser.png';
 import strokeCursorIcon from './assets/images/cursors/stroke.png';
 import penCursorIcon from './assets/images/cursors/pen.png';
 import paintBucketCursorIcon from './assets/images/cursors/paint-bucket.png';
+import colorPickerCursorIcon from './assets/images/cursors/colorPicker.png';
 
 import MouseCoordinatesMove from './components/model-dialog/mouseCoordinatesMove';
 
@@ -25,6 +27,7 @@ const penSizeConteiner = document.querySelector('.pen-size-conteiner');
 const toolsConteiner = document.querySelector('.tools-conteiner');
 const settingsConteiner = document.querySelector('.settings-conteiner__list');
 const canvas = document.querySelector('.canvas-conteiner__canvas');
+const main = document.querySelector('.main');
 const swapColors = document.querySelector('#swap-colors');
 const buttonAddFrame = document.getElementById('addFrame');
 
@@ -114,6 +117,7 @@ penSizeConteiner.addEventListener('click', (event) => {
 
 toolsConteiner.addEventListener('click', (event) => {
   const arrSize = event.target.parentNode.parentNode.parentNode.children;
+  document.body.children[1].style.cursor = 'default';
   if (event.target.parentNode.id === 'tool-pen') {
     if (state.correntTool === 'toolPen') {
       event.target.parentNode.classList.remove('tools-conteiner__item_button-active');
@@ -170,11 +174,28 @@ toolsConteiner.addEventListener('click', (event) => {
       canvas.style.cursor = `url(${strokeCursorIcon}), auto`;
     }
     localStorage.setItem('correntTool', state.correntTool);
+  } else if (event.target.parentNode.id === 'tool-color-picker') {
+    if (state.correntTool === 'toolColorPicker') {
+      event.target.parentNode.classList.remove('tools-conteiner__item_button-active');
+      state.correntTool = '';
+      document.body.children[1].style.cursor = 'default';
+      canvas.style.cursor = 'default';
+    } else {
+      for (let i = 0; i < arrSize.length; i += 1) {
+        arrSize[i].children[0].classList.remove('tools-conteiner__item_button-active');
+      }
+      state.correntTool = 'toolColorPicker';
+      event.target.parentNode.classList.add('tools-conteiner__item_button-active');
+      document.body.children[1].style.cursor = `url(${colorPickerCursorIcon}), auto`;
+      canvas.style.cursor = `url(${colorPickerCursorIcon}), auto`;
+    }
+    localStorage.setItem('correntTool', state.correntTool);
   }
 });
 
 document.addEventListener('keypress', (event) => {
   const arrSize = toolsConteiner.children[0].children;
+  document.body.children[1].style.cursor = 'default';
   switch (event.key) {
     case 'p':
       if (state.correntTool === 'toolPen') {
@@ -233,6 +254,23 @@ document.addEventListener('keypress', (event) => {
         state.correntTool = 'toolStroke';
         arrSize[3].children[0].classList.add('tools-conteiner__item_button-active');
         canvas.style.cursor = `url(${strokeCursorIcon}), auto`;
+      }
+      localStorage.setItem('correntTool', state.correntTool);
+      break;
+    case 'o':
+      if (state.correntTool === 'toolColorPicker') {
+        arrSize[4].children[0].classList.remove('tools-conteiner__item_button-active');
+        state.correntTool = '';
+        document.body.children[1].style.cursor = 'default';
+        canvas.style.cursor = 'default';
+      } else {
+        for (let i = 0; i < arrSize.length; i += 1) {
+          arrSize[i].children[0].classList.remove('tools-conteiner__item_button-active');
+        }
+        state.correntTool = 'toolColorPicker';
+        arrSize[4].children[0].classList.add('tools-conteiner__item_button-active');
+        document.body.children[1].style.cursor = `url(${colorPickerCursorIcon}), auto`;
+        canvas.style.cursor = `url(${colorPickerCursorIcon}), auto`;
       }
       localStorage.setItem('correntTool', state.correntTool);
       break;
@@ -340,6 +378,7 @@ canvas.addEventListener('mousedown', (event) => {
   const toolEraser = document.querySelector('#tool-eraser');
   const toolPen = document.querySelector('#tool-pen');
   const toolPaintBucket = document.querySelector('#tool-paint-bucket');
+  const toolColorPicket = document.querySelector('#tool-color-picker');
   const startX = event.offsetX;
   const startY = event.offsetY;
   const { which } = event;
@@ -362,6 +401,21 @@ canvas.addEventListener('mousedown', (event) => {
     const stroke = new PaintBucket(canvData32, canvData64, canvData128, startX, startY);
     stroke.start();
     preview.renameSizeFPS();
+  }
+  if (toolColorPicket.classList[1] === 'tools-conteiner__item_button-active') {
+    const colorPicker = new ColorPicker(event.target);
+    colorPicker.start();
+    localStorage.setItem('primaryColor', document.querySelector('.color-conteiner__primary_item').value);
+  }
+});
+
+main.addEventListener('click', (event) => {
+  const toolColorPicket = document.querySelector('#tool-color-picker');
+  const { which } = event;
+  if (toolColorPicket.classList[1] === 'tools-conteiner__item_button-active') {
+    const colorPicker = new ColorPicker(event.target, which);
+    colorPicker.start();
+    localStorage.setItem('primaryColor', document.querySelector('.color-conteiner__primary_item').value);
   }
 });
 
@@ -392,6 +446,10 @@ if (localStorage.getItem('correntTool') !== null) {
     case 'toolStroke':
       toolsConteiner.children[0].children[3].children[0].classList.add('tools-conteiner__item_button-active');
       canvas.style.cursor = `url(${strokeCursorIcon}), auto`;
+      break;
+    case 'toolColorPicker':
+      toolsConteiner.children[0].children[4].children[0].classList.add('tools-conteiner__item_button-active');
+      document.body.children[1].style.cursor = `url(${colorPickerCursorIcon}), auto`;
       break;
     default:
       break;

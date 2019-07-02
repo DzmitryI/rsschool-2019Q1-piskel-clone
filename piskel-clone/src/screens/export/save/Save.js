@@ -1,4 +1,4 @@
-import './index.scss';
+import './save.scss';
 
 export default class Save {
   constructor() {
