@@ -36,7 +36,6 @@ export default class FrameList {
     const addButton = this.form.querySelector('.frame-add-button');
     const ctx = canvasFr.getContext('2d');
     ctx.clearRect(0, 0, canvasFr.width, canvasFr.height);
-    // eslint-disable-next-line max-len
     containerCurrentFrame.appendChild(buttonCanvasFrameDel);
     containerCurrentFrame.appendChild(buttonCloneFrame);
     containerCurrentFrame.appendChild(buttonCurrentNumber);
@@ -64,8 +63,10 @@ export default class FrameList {
       }
     };
     if (event.target.classList[1] === 'button-del-frame') {
-      event.target.parentNode.parentNode.removeChild(event.target.parentNode);
-      currentNumberFrame();
+      if (event.target.parentNode.parentNode.children.length > 2) {
+        event.target.parentNode.parentNode.removeChild(event.target.parentNode);
+        currentNumberFrame();
+      }
     } else if (event.target.classList[1] === 'button-clone-frame') {
       const { nextSibling } = event.target.parentNode;
       const cloneCanv = event.target.parentNode.children[4];
@@ -96,6 +97,7 @@ export default class FrameList {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.imageSmoothingEnabled = false;
         ctx.drawImage(canvFr, 0, 0, canvFr.width, canvFr.height, 0, 0, canvas.width, canvas.height);
+        currentNumberFrame();
       }
     }
     event.stopImmediatePropagation();
