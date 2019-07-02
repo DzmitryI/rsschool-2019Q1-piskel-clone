@@ -5,6 +5,7 @@ import eraserIcon from '../../../assets/images/icons/tools/tool-eraser.png';
 import strokeIcon from '../../../assets/images/icons/tools/tool-stroke.png';
 import swapColorsIcon from '../../../assets/images/icons/tools/swap_color.png';
 import colorPickerIcon from '../../../assets/images/icons/tools/tool-colorpicker.png';
+import lightenIcon from '../../../assets/images/icons/tools/tool-lighten.png';
 
 export default class ModelCheatsheer {
   constructor() {
@@ -22,6 +23,8 @@ export default class ModelCheatsheer {
     stroke.src = strokeIcon;
     const colorPicker = this.form.getElementById('tip-tool-color-picker-img');
     colorPicker.src = colorPickerIcon;
+    const lighten = this.form.getElementById('tip-tool-lighten-img');
+    lighten.src = lightenIcon;
     const swapColors = this.form.getElementById('tip-swap-colors-img');
     swapColors.src = swapColorsIcon;
 

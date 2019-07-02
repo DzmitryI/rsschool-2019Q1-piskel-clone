@@ -7,6 +7,7 @@ import paintBacketIcon from '../../assets/images/icons/tools/tool-paint-bucket.p
 import eraserIcon from '../../assets/images/icons/tools/tool-eraser.png';
 import strokeIcon from '../../assets/images/icons/tools/tool-stroke.png';
 import colorPickerIcon from '../../assets/images/icons/tools/tool-colorpicker.png';
+import lightenIcon from '../../assets/images/icons/tools/tool-lighten.png';
 
 import backgroundCanvasImg from '../../assets/images/canvas-backgrounds/canvas-background-light.png';
 
@@ -46,6 +47,8 @@ export default class Index {
     stroke.src = strokeIcon;
     const colorPicker = this.form.getElementById('tool-color-picker-img');
     colorPicker.src = colorPickerIcon;
+    const lighten = this.form.getElementById('tool-lighten-img');
+    lighten.src = lightenIcon;
 
     const backgroundCanvas = this.form.querySelector('.canvas-conteiner__canvas');
     backgroundCanvas.style.backgroundImage = `url(${backgroundCanvasImg})`;

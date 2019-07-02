@@ -11,12 +11,15 @@ import Stroke from './components/tools/Stroke';
 import Eraser from './components/tools/Eraser';
 import PaintBucket from './components/tools/PaintBucket';
 import ColorPicker from './components/tools/ColorPicker';
+import Lighten from './components/tools/Lighten';
+
 
 import eraserCursorIcon from './assets/images/cursors/eraser.png';
 import strokeCursorIcon from './assets/images/cursors/stroke.png';
 import penCursorIcon from './assets/images/cursors/pen.png';
 import paintBucketCursorIcon from './assets/images/cursors/paint-bucket.png';
 import colorPickerCursorIcon from './assets/images/cursors/colorPicker.png';
+import lightenCursorIcon from './assets/images/cursors/lighten.png';
 
 import MouseCoordinatesMove from './components/model-dialog/mouseCoordinatesMove';
 
@@ -190,6 +193,20 @@ toolsConteiner.addEventListener('click', (event) => {
       canvas.style.cursor = `url(${colorPickerCursorIcon}), auto`;
     }
     localStorage.setItem('correntTool', state.correntTool);
+  } else if (event.target.parentNode.id === 'tool-lighten') {
+    if (state.correntTool === 'toolLighten') {
+      event.target.parentNode.classList.remove('tools-conteiner__item_button-active');
+      state.correntTool = '';
+      canvas.style.cursor = 'default';
+    } else {
+      for (let i = 0; i < arrSize.length; i += 1) {
+        arrSize[i].children[0].classList.remove('tools-conteiner__item_button-active');
+      }
+      state.correntTool = 'toolLighten';
+      event.target.parentNode.classList.add('tools-conteiner__item_button-active');
+      canvas.style.cursor = `url(${lightenCursorIcon}), auto`;
+    }
+    localStorage.setItem('correntTool', state.correntTool);
   }
 });
 
@@ -271,6 +288,21 @@ document.addEventListener('keypress', (event) => {
         arrSize[4].children[0].classList.add('tools-conteiner__item_button-active');
         document.body.children[1].style.cursor = `url(${colorPickerCursorIcon}), auto`;
         canvas.style.cursor = `url(${colorPickerCursorIcon}), auto`;
+      }
+      localStorage.setItem('correntTool', state.correntTool);
+      break;
+    case 'u':
+      if (state.correntTool === 'toolLighten') {
+        arrSize[5].children[0].classList.remove('tools-conteiner__item_button-active');
+        state.correntTool = '';
+        canvas.style.cursor = 'default';
+      } else {
+        for (let i = 0; i < arrSize.length; i += 1) {
+          arrSize[i].children[0].classList.remove('tools-conteiner__item_button-active');
+        }
+        state.correntTool = 'toolLighten';
+        arrSize[5].children[0].classList.add('tools-conteiner__item_button-active');
+        canvas.style.cursor = `url(${lightenCursorIcon}), auto`;
       }
       localStorage.setItem('correntTool', state.correntTool);
       break;
@@ -379,6 +411,7 @@ canvas.addEventListener('mousedown', (event) => {
   const toolPen = document.querySelector('#tool-pen');
   const toolPaintBucket = document.querySelector('#tool-paint-bucket');
   const toolColorPicket = document.querySelector('#tool-color-picker');
+  const toollighten = document.querySelector('#tool-lighten');
   const startX = event.offsetX;
   const startY = event.offsetY;
   const { which } = event;
@@ -406,6 +439,14 @@ canvas.addEventListener('mousedown', (event) => {
     const colorPicker = new ColorPicker(event.target);
     colorPicker.start();
     localStorage.setItem('primaryColor', document.querySelector('.color-conteiner__primary_item').value);
+  }
+  if (toollighten.classList[1] === 'tools-conteiner__item_button-active') {
+    const ctx = canvas.getContext('2d');
+    const colorC = ctx.getImageData(0, 0, canvas.clientWidth, canvas.clientHeight);
+    // eslint-disable-next-line max-len
+    const stroke = new Lighten(colorC, canvData32, canvData64, canvData128, startX, startY, which, event.shiftKey);
+    stroke.start();
+    preview.renameSizeFPS();
   }
 });
 
@@ -450,6 +491,10 @@ if (localStorage.getItem('correntTool') !== null) {
     case 'toolColorPicker':
       toolsConteiner.children[0].children[4].children[0].classList.add('tools-conteiner__item_button-active');
       document.body.children[1].style.cursor = `url(${colorPickerCursorIcon}), auto`;
+      break;
+    case 'toolLighten':
+      toolsConteiner.children[0].children[5].children[0].classList.add('tools-conteiner__item_button-active');
+      document.body.children[1].style.cursor = `url(${lightenCursorIcon}), auto`;
       break;
     default:
       break;
