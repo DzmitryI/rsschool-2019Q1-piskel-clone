@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1562156052387" clover="3.2.0">
-  <project timestamp="1562156052388" name="All files">
-    <metrics statements="142" coveredstatements="3" conditionals="28" coveredconditionals="0" methods="28" coveredmethods="0" elements="198" coveredelements="3" complexity="0" loc="142" ncloc="142" packages="4" files="4" classes="4"/>
+<coverage generated="1562177825516" clover="3.2.0">
+  <project timestamp="1562177825516" name="All files">
+    <metrics statements="165" coveredstatements="11" conditionals="32" coveredconditionals="3" methods="33" coveredmethods="1" elements="230" coveredelements="15" complexity="0" loc="165" ncloc="165" packages="5" files="7" classes="7"/>
     <package name="components.frame-list">
       <metrics statements="98" coveredstatements="0" conditionals="16" coveredconditionals="0" methods="16" coveredmethods="0"/>
       <file name="FrameList.js" path="D:\JSSCHOOL\DzmitryI-2019Q1\piskel-clone\src\components\frame-list\FrameList.js">
@@ -139,11 +139,30 @@
         <line num="41" count="0" type="stmt"/>
       </file>
     </package>
+    <package name="components.tools">
+      <metrics statements="13" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="0"/>
+      <file name="ColorPicker.js" path="D:\JSSCHOOL\DzmitryI-2019Q1\piskel-clone\src\components\tools\ColorPicker.js">
+        <metrics statements="13" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="6" count="0" type="stmt"/>
+        <line num="7" count="0" type="stmt"/>
+        <line num="8" count="0" type="stmt"/>
+        <line num="9" count="0" type="stmt"/>
+        <line num="10" count="0" type="stmt"/>
+        <line num="14" count="0" type="stmt"/>
+        <line num="15" count="0" type="stmt"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="20" count="0" type="stmt"/>
+        <line num="21" count="0" type="stmt"/>
+        <line num="22" count="0" type="stmt"/>
+      </file>
+    </package>
     <package name="screens.export.save">
       <metrics statements="14" coveredstatements="1" conditionals="2" coveredconditionals="0" methods="4" coveredmethods="0"/>
       <file name="Save.js" path="D:\JSSCHOOL\DzmitryI-2019Q1\piskel-clone\src\screens\export\save\Save.js">
         <metrics statements="14" coveredstatements="1" conditionals="2" coveredconditionals="0" methods="4" coveredmethods="0"/>
-        <line num="3" count="1" type="stmt"/>
+        <line num="3" count="2" type="stmt"/>
         <line num="7" count="0" type="stmt"/>
         <line num="11" count="0" type="stmt"/>
         <line num="12" count="0" type="stmt"/>
@@ -160,12 +179,28 @@
       </file>
     </package>
     <package name="utils">
-      <metrics statements="3" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+      <metrics statements="13" coveredstatements="8" conditionals="4" coveredconditionals="3" methods="3" coveredmethods="1"/>
       <file name="assetsTransformer.js" path="D:\JSSCHOOL\DzmitryI-2019Q1\piskel-clone\src\utils\assetsTransformer.js">
         <metrics statements="3" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
         <line num="5" count="0" type="stmt"/>
+      </file>
+      <file name="colorPixel.js" path="D:\JSSCHOOL\DzmitryI-2019Q1\piskel-clone\src\utils\colorPixel.js">
+        <metrics statements="6" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="1" count="2" type="stmt"/>
+        <line num="2" count="0" type="stmt"/>
+        <line num="3" count="0" type="stmt"/>
+        <line num="4" count="0" type="stmt"/>
+        <line num="5" count="0" type="stmt"/>
+        <line num="8" count="2" type="stmt"/>
+      </file>
+      <file name="hex2rgb.js" path="D:\JSSCHOOL\DzmitryI-2019Q1\piskel-clone\src\utils\hex2rgb.js">
+        <metrics statements="4" coveredstatements="4" conditionals="4" coveredconditionals="3" methods="1" coveredmethods="1"/>
+        <line num="1" count="2" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="4" count="1" type="cond" truecount="3" falsecount="1"/>
+        <line num="10" count="2" type="stmt"/>
       </file>
     </package>
   </project>

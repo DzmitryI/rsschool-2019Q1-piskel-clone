@@ -1,4 +1,5 @@
 const { hex2rgb } = require('../../utils/hex2rgb');
+const { colorPixel } = require('../../utils/colorPixel');
 
 export default class ColorPicker {
   constructor(target, startX, startY, colorLayerData) {
@@ -14,17 +15,10 @@ export default class ColorPicker {
     this.form.querySelector('.color-conteiner__primary_item').value = newColor;
   }
 
-  colorPixel(pixelPos) {
-    const r = this.colorLayerData.data[pixelPos];
-    const g = this.colorLayerData.data[pixelPos + 1];
-    const b = this.colorLayerData.data[pixelPos + 2];
-    return `rgba(${r},${g},${b})`;
-  }
-
   startCanvas() {
     const canvas = this.form.querySelector('.canvas-conteiner__canvas');
     const pixelPos = (this.startY * canvas.clientWidth + this.startX) * 4;
-    const hex = hex2rgb(this.colorPixel(pixelPos));
+    const hex = hex2rgb(colorPixel(pixelPos, this.colorLayerData));
     this.form.querySelector('.color-conteiner__primary_item').value = hex;
   }
 }
