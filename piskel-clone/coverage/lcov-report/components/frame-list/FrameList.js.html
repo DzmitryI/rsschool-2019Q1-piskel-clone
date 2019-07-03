@@ -22,22 +22,22 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>0/98</span>
+        <span class='fraction'>0/103</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>0/12</span>
+        <span class='fraction'>0/16</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>0/15</span>
+        <span class='fraction'>0/16</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/94</span>
+        <span class='fraction'>0/98</span>
       </div>
     </div>
     <p class="quiet">
@@ -188,7 +188,12 @@
 <a name='L140'></a><a href='#L140'>140</a>
 <a name='L141'></a><a href='#L141'>141</a>
 <a name='L142'></a><a href='#L142'>142</a>
-<a name='L143'></a><a href='#L143'>143</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L143'></a><a href='#L143'>143</a>
+<a name='L144'></a><a href='#L144'>144</a>
+<a name='L145'></a><a href='#L145'>145</a>
+<a name='L146'></a><a href='#L146'>146</a>
+<a name='L147'></a><a href='#L147'>147</a>
+<a name='L148'></a><a href='#L148'>148</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -226,7 +231,6 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -257,6 +261,8 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -266,6 +272,9 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -276,6 +285,7 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -368,7 +378,6 @@ export default class FrameList {
     const addButton = <span class="cstat-no" title="statement not covered" >this.form.querySelector('.frame-add-button');</span>
     const ctx = <span class="cstat-no" title="statement not covered" >canvasFr.getContext('2d');</span>
 <span class="cstat-no" title="statement not covered" >    ctx.clearRect(0, 0, canvasFr.width, canvasFr.height);</span>
-    // eslint-disable-next-line max-len
 <span class="cstat-no" title="statement not covered" >    containerCurrentFrame.appendChild(buttonCanvasFrameDel);</span>
 <span class="cstat-no" title="statement not covered" >    containerCurrentFrame.appendChild(buttonCloneFrame);</span>
 <span class="cstat-no" title="statement not covered" >    containerCurrentFrame.appendChild(buttonCurrentNumber);</span>
@@ -396,8 +405,10 @@ export default class FrameList {
       }
     };
 <span class="cstat-no" title="statement not covered" >    if (event.target.classList[1] === 'button-del-frame') {</span>
-<span class="cstat-no" title="statement not covered" >      event.target.parentNode.parentNode.removeChild(event.target.parentNode);</span>
-<span class="cstat-no" title="statement not covered" >      currentNumberFrame();</span>
+<span class="cstat-no" title="statement not covered" >      if (event.target.parentNode.parentNode.children.length &gt; 2) {</span>
+<span class="cstat-no" title="statement not covered" >        event.target.parentNode.parentNode.removeChild(event.target.parentNode);</span>
+<span class="cstat-no" title="statement not covered" >        currentNumberFrame();</span>
+      }
     } else <span class="cstat-no" title="statement not covered" >if (event.target.classList[1] === 'button-clone-frame') {</span>
       const { nextSibling } = <span class="cstat-no" title="statement not covered" >event.target.parentNode;</span>
       const cloneCanv = <span class="cstat-no" title="statement not covered" >event.target.parentNode.children[4];</span>
@@ -407,6 +418,9 @@ export default class FrameList {
       // eslint-disable-next-line max-len
 <span class="cstat-no" title="statement not covered" >      ctx.drawImage(cloneCanv, 0, 0, cloneCanv.width, cloneCanv.height, 0, 0, newCloneCanv.width, newCloneCanv.height);</span>
 <span class="cstat-no" title="statement not covered" >      event.target.parentNode.parentNode.insertBefore(newCloneFrame, nextSibling);</span>
+<span class="cstat-no" title="statement not covered" >      if ([].some.call(newCloneFrame.classList, <span class="fstat-no" title="function not covered" >it</span>em =&gt; <span class="cstat-no" title="statement not covered" >item === 'container-current-frame-activ')</span>) {</span>
+<span class="cstat-no" title="statement not covered" >        newCloneFrame.classList.remove('container-current-frame-activ');</span>
+      }
 <span class="cstat-no" title="statement not covered" >      currentNumberFrame();</span>
 &nbsp;
       const cols = <span class="cstat-no" title="statement not covered" >document.querySelectorAll('.container-current-frame');</span>
@@ -428,6 +442,7 @@ export default class FrameList {
 <span class="cstat-no" title="statement not covered" >        ctx.clearRect(0, 0, canvas.width, canvas.height);</span>
 <span class="cstat-no" title="statement not covered" >        ctx.imageSmoothingEnabled = false;</span>
 <span class="cstat-no" title="statement not covered" >        ctx.drawImage(canvFr, 0, 0, canvFr.width, canvFr.height, 0, 0, canvas.width, canvas.height);</span>
+<span class="cstat-no" title="statement not covered" >        currentNumberFrame();</span>
       }
     }
 <span class="cstat-no" title="statement not covered" >    event.stopImmediatePropagation();</span>
@@ -478,7 +493,7 @@ export default class FrameList {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Jul 02 2019 13:50:03 GMT+0300 (GMT+03:00)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Jul 03 2019 15:14:11 GMT+0300 (GMT+03:00)
 </div>
 </div>
 <script src="..\..\prettify.js"></script>

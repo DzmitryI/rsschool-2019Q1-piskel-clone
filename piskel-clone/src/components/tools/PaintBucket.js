@@ -65,7 +65,7 @@ export default class PaintBucket {
         reachLeft = false;
         reachRight = false;
 
-        while (y <= 600 && matchStartColor(pixelPos, startR, startG, startB, colorData)) {
+        while (y <= canvWdth && matchStartColor(pixelPos, startR, startG, startB, colorData)) {
           y += 1;
 
           colorPixel(pixelPos, primaryColor.r, primaryColor.g, primaryColor.b, colorData);
@@ -80,7 +80,7 @@ export default class PaintBucket {
               reachLeft = false;
             }
           }
-          if (x < 600) {
+          if (x < canvWdth) {
             if (matchStartColor(pixelPos + 4, startR, startG, startB, outlineData)) {
               if (!reachRight) {
                 pixelStack.push([x + 1, y]);

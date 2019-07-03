@@ -1,3 +1,5 @@
+const { currentPixel } = require('../../utils/currentPixel');
+
 export default class Eraser {
   constructor(canvasData32, canvasData64, canvasData128, startX, startY, which) {
     this.form = document;
@@ -53,14 +55,13 @@ export default class Eraser {
       }
       canvas.onmousemove = null;
     };
-    // const ctx = canvas.getContext('2d');
     let canvasData = [];
     if (this.currentResizeCanvas === 32) canvasData = this.canvasData32;
     else if (this.currentResizeCanvas === 64) canvasData = this.canvasData64;
     else if (this.currentResizeCanvas === 128) canvasData = this.canvasData128;
     const x = this.startX + 5;
     const y = this.startY + 10;
-    this.currentPixel(canvas, canvasData, x, y);
+    currentPixel(canvas, canvasData, x, y, this.sizePen, this.which);
   }
 
   onmousemove(event) {
@@ -71,26 +72,6 @@ export default class Eraser {
     else if (this.currentResizeCanvas === 128) canvasData = this.canvasData128;
     const x = event.offsetX + 5;
     const y = event.offsetY + 10;
-    this.currentPixel(canvas, canvasData, x, y);
-  }
-
-  currentPixel(canvas, canvasData, startX, startY) {
-    const primaryColor = this.form.querySelector('.color-conteiner__primary_item').value;
-    const secondaryColor = this.form.querySelector('.color-conteiner__secondary_item').value;
-    const { sizePen } = this;
-    const ctx = canvas.getContext('2d');
-    if (this.which === 1) ctx.fillStyle = primaryColor;
-    else if (this.which === 3) ctx.fillStyle = secondaryColor;
-    for (let i = 0; i < canvasData.length; i += 1) {
-      const xi = canvasData[i][0] + canvasData[i][2];
-      const yi = canvasData[i][1] + canvasData[i][3];
-      if ((startX <= xi) && (startY <= yi)) {
-        // eslint-disable-next-line max-len
-        ctx.clearRect(canvasData[i][0] - sizePen, canvasData[i][1] - sizePen, canvasData[i][2] + sizePen, canvasData[i][3] + sizePen);
-        // eslint-disable-next-line max-len
-        ctx.fillRect(canvasData[i][0] - sizePen, canvasData[i][1] - sizePen, canvasData[i][2] + sizePen, canvasData[i][3] + sizePen);
-        break;
-      }
-    }
+    currentPixel(canvas, canvasData, x, y, this.sizePen, this.which);
   }
 }
