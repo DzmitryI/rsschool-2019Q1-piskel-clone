@@ -56,7 +56,6 @@ export default class Lighten {
       }
       canvas.onmousemove = null;
     };
-    // const ctx = canvas.getContext('2d');
     let canvasData = [];
     if (this.currentResizeCanvas === 32) canvasData = this.canvasData32;
     else if (this.currentResizeCanvas === 64) canvasData = this.canvasData64;

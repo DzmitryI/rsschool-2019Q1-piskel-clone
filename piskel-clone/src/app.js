@@ -30,7 +30,6 @@ const penSizeConteiner = document.querySelector('.pen-size-conteiner');
 const toolsConteiner = document.querySelector('.tools-conteiner');
 const settingsConteiner = document.querySelector('.settings-conteiner__list');
 const canvas = document.querySelector('.canvas-conteiner__canvas');
-const main = document.querySelector('.main');
 const swapColors = document.querySelector('#swap-colors');
 const buttonAddFrame = document.getElementById('addFrame');
 
@@ -120,7 +119,6 @@ penSizeConteiner.addEventListener('click', (event) => {
 
 toolsConteiner.addEventListener('click', (event) => {
   const arrSize = event.target.parentNode.parentNode.parentNode.children;
-  document.body.children[1].style.cursor = 'default';
   if (event.target.parentNode.id === 'tool-pen') {
     if (state.correntTool === 'toolPen') {
       event.target.parentNode.classList.remove('tools-conteiner__item_button-active');
@@ -181,7 +179,6 @@ toolsConteiner.addEventListener('click', (event) => {
     if (state.correntTool === 'toolColorPicker') {
       event.target.parentNode.classList.remove('tools-conteiner__item_button-active');
       state.correntTool = '';
-      document.body.children[1].style.cursor = 'default';
       canvas.style.cursor = 'default';
     } else {
       for (let i = 0; i < arrSize.length; i += 1) {
@@ -189,7 +186,6 @@ toolsConteiner.addEventListener('click', (event) => {
       }
       state.correntTool = 'toolColorPicker';
       event.target.parentNode.classList.add('tools-conteiner__item_button-active');
-      document.body.children[1].style.cursor = `url(${colorPickerCursorIcon}), auto`;
       canvas.style.cursor = `url(${colorPickerCursorIcon}), auto`;
     }
     localStorage.setItem('correntTool', state.correntTool);
@@ -212,7 +208,6 @@ toolsConteiner.addEventListener('click', (event) => {
 
 document.addEventListener('keypress', (event) => {
   const arrSize = toolsConteiner.children[0].children;
-  document.body.children[1].style.cursor = 'default';
   switch (event.key) {
     case 'p':
       if (state.correntTool === 'toolPen') {
@@ -278,7 +273,6 @@ document.addEventListener('keypress', (event) => {
       if (state.correntTool === 'toolColorPicker') {
         arrSize[4].children[0].classList.remove('tools-conteiner__item_button-active');
         state.correntTool = '';
-        document.body.children[1].style.cursor = 'default';
         canvas.style.cursor = 'default';
       } else {
         for (let i = 0; i < arrSize.length; i += 1) {
@@ -286,7 +280,6 @@ document.addEventListener('keypress', (event) => {
         }
         state.correntTool = 'toolColorPicker';
         arrSize[4].children[0].classList.add('tools-conteiner__item_button-active');
-        document.body.children[1].style.cursor = `url(${colorPickerCursorIcon}), auto`;
         canvas.style.cursor = `url(${colorPickerCursorIcon}), auto`;
       }
       localStorage.setItem('correntTool', state.correntTool);
@@ -415,6 +408,8 @@ canvas.addEventListener('mousedown', (event) => {
   const startX = event.offsetX;
   const startY = event.offsetY;
   const { which } = event;
+  const ctx = canvas.getContext('2d');
+  const colorC = ctx.getImageData(0, 0, canvas.clientWidth, canvas.clientHeight);
   if (toolStroke.classList[1] === 'tools-conteiner__item_button-active') {
     const stroke = new Stroke(canvData32, canvData64, canvData128, startX, startY);
     stroke.start();
@@ -436,27 +431,15 @@ canvas.addEventListener('mousedown', (event) => {
     preview.renameSizeFPS();
   }
   if (toolColorPicket.classList[1] === 'tools-conteiner__item_button-active') {
-    const colorPicker = new ColorPicker(event.target);
-    colorPicker.start();
+    const colorPicker = new ColorPicker(event.target, startX, startY, colorC);
+    colorPicker.startCanvas();
     localStorage.setItem('primaryColor', document.querySelector('.color-conteiner__primary_item').value);
   }
   if (toollighten.classList[1] === 'tools-conteiner__item_button-active') {
-    const ctx = canvas.getContext('2d');
-    const colorC = ctx.getImageData(0, 0, canvas.clientWidth, canvas.clientHeight);
     // eslint-disable-next-line max-len
-    const stroke = new Lighten(colorC, canvData32, canvData64, canvData128, startX, startY, which, event.shiftKey);
-    stroke.start();
+    const lighten = new Lighten(colorC, canvData32, canvData64, canvData128, startX, startY, which, event.shiftKey);
+    lighten.start();
     preview.renameSizeFPS();
-  }
-});
-
-main.addEventListener('click', (event) => {
-  const toolColorPicket = document.querySelector('#tool-color-picker');
-  const { which } = event;
-  if (toolColorPicket.classList[1] === 'tools-conteiner__item_button-active') {
-    const colorPicker = new ColorPicker(event.target, which);
-    colorPicker.start();
-    localStorage.setItem('primaryColor', document.querySelector('.color-conteiner__primary_item').value);
   }
 });
 
@@ -490,11 +473,11 @@ if (localStorage.getItem('correntTool') !== null) {
       break;
     case 'toolColorPicker':
       toolsConteiner.children[0].children[4].children[0].classList.add('tools-conteiner__item_button-active');
-      document.body.children[1].style.cursor = `url(${colorPickerCursorIcon}), auto`;
+      canvas.style.cursor = `url(${colorPickerCursorIcon}), auto`;
       break;
     case 'toolLighten':
       toolsConteiner.children[0].children[5].children[0].classList.add('tools-conteiner__item_button-active');
-      document.body.children[1].style.cursor = `url(${lightenCursorIcon}), auto`;
+      canvas.style.cursor = `url(${lightenCursorIcon}), auto`;
       break;
     default:
       break;

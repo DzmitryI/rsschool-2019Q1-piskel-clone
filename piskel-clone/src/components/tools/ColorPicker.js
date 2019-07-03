@@ -1,19 +1,30 @@
+const { hex2rgb } = require('../../utils/hex2rgb');
+
 export default class ColorPicker {
-  constructor(target) {
+  constructor(target, startX, startY, colorLayerData) {
     this.form = document;
     this.target = target;
+    this.startX = startX;
+    this.startY = startY;
+    this.colorLayerData = colorLayerData;
   }
 
   start() {
-    const hex2rgb = (rgb) => {
-      const rgba = rgb.match(/^rgba?[\s+]?\([\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?/i);
-
-      return (rgba && rgba.length === 4) ? `#${
-        (`0${parseInt(rgba[1], 10).toString(16)}`).slice(-2)
-      }${(`0${parseInt(rgba[2], 10).toString(16)}`).slice(-2)
-      }${(`0${parseInt(rgba[3], 10).toString(16)}`).slice(-2)}` : '';
-    };
     const newColor = hex2rgb(window.getComputedStyle(this.target).backgroundColor);
     this.form.querySelector('.color-conteiner__primary_item').value = newColor;
+  }
+
+  colorPixel(pixelPos) {
+    const r = this.colorLayerData.data[pixelPos];
+    const g = this.colorLayerData.data[pixelPos + 1];
+    const b = this.colorLayerData.data[pixelPos + 2];
+    return `rgba(${r},${g},${b})`;
+  }
+
+  startCanvas() {
+    const canvas = this.form.querySelector('.canvas-conteiner__canvas');
+    const pixelPos = (this.startY * canvas.clientWidth + this.startX) * 4;
+    const hex = hex2rgb(this.colorPixel(pixelPos));
+    this.form.querySelector('.color-conteiner__primary_item').value = hex;
   }
 }
