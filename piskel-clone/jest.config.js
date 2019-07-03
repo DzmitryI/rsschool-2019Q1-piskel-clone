@@ -8,7 +8,7 @@ module.exports = {
   ],
   moduleNameMapper: {
     '\.(css|less|scss|sss|styl)$': '<rootDir>/node_modules/jest-css-modules',
-    '\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2)$': '<rootDir>/src/components/assetsTransformer.js',
+    '\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2)$': '<rootDir>/src/utils/assetsTransformer.js',
   },
   transform: {
     '^.+\.js$': 'babel-jest',

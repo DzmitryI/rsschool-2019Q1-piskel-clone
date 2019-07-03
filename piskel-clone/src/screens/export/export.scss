@@ -1,6 +1,6 @@
 .export-canvas-conteiner {
   display: none;
-  height: 100px;
+  height: 110px;
 }
 
 .export-canvas-form {
@@ -11,17 +11,9 @@
   background: rgb(104, 98, 98);
 }
 
-#export-button {
-  display: none;
-}
-
-label {
-  display: block;
-  text-align: center;
-  margin: 5px auto;
-}
-
-.export-button__label {
+.export-button {
+  position: relative;
+  left: 25%;
   width: 145px;
   height: 25px;
   border-radius: 4px;
@@ -33,7 +25,7 @@ label {
   color: #e1e1e1;
 }
 
-.export-button__label:hover {
+.export-button:hover {
   border: 1px solid #253737;
   text-shadow: #333333 0 1px 0;
   background: #416b68;
@@ -46,7 +38,7 @@ label {
   color: #fff;
 }
 
-.export-button__label:active {
+.export-button:active {
   margin-top:1px;
   text-shadow: #333333 0 -1px 0;
   border: 1px solid #333333;

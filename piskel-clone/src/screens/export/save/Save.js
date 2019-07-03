@@ -1,5 +1,7 @@
 import './save.scss';
 
+const FileSaver = require('file-saver');
+
 export default class Save {
   constructor() {
     this.form = document;
@@ -19,8 +21,6 @@ export default class Save {
     const piskelName = this.form.querySelector('.save-field');
     let fileName = '';
     if (piskelName.value.length > 0) { fileName = `${piskelName.value}.piskel`; }
-    // eslint-disable-next-line global-require
-    const FileSaver = require('file-saver');
 
     canvas.toBlob((blob) => {
       FileSaver.saveAs(blob, fileName);

@@ -76,6 +76,9 @@ export default class FrameList {
       // eslint-disable-next-line max-len
       ctx.drawImage(cloneCanv, 0, 0, cloneCanv.width, cloneCanv.height, 0, 0, newCloneCanv.width, newCloneCanv.height);
       event.target.parentNode.parentNode.insertBefore(newCloneFrame, nextSibling);
+      if ([].some.call(newCloneFrame.classList, item => item === 'container-current-frame-activ')) {
+        newCloneFrame.classList.remove('container-current-frame-activ');
+      }
       currentNumberFrame();
 
       const cols = document.querySelectorAll('.container-current-frame');

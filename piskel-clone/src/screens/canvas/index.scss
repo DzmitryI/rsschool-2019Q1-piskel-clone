@@ -246,6 +246,10 @@ border: 3px solid rgb(182, 151, 151);
   font-family: 'Roboto-Regular';
   border-radius: 5%;
   font-size: 13px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .buttonCarrentPage {
