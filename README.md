@@ -2,6 +2,8 @@
 
 ### Task https://github.com/rolling-scopes-school/tasks/blob/2018-Q3/tasks/piskel-clone.md
 
+### Link on my gh-pages: [https://DzmitryI.github.io/rsschool-2019Q1-piskel-clone](https://DzmitryI.github.io/rsschool-2019Q1-piskel-clone/)
+
 ## How to run project:
 #### npm install
 Install packages
